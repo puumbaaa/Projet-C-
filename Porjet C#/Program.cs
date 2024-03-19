@@ -1,22 +1,22 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-
+using Mapp;
 namespace test
 {
     class Program
     {
 
-        static readonly string textFile = "C:\\Users\\gbravin\\source\\repos\\Porjet C#\\Map\\map.txt";
-
+    
 
         static void Main(string[] args)
         {
-            if (File.Exists(textFile))
-            {
-                // Read entire text file content in one string
-                string text = File.ReadAllText(textFile);
-                Console.WriteLine(text);
-            }
+
+            
+            FileReader map = new FileReader();
+            map.setFile();
+            Console.WriteLine(map.sText);
+            Console.SetCursorPosition(0, 0);
+            Console.SetBufferSize(120, 30);
             while (true) { }
         }
     }
