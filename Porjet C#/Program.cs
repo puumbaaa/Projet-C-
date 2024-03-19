@@ -44,49 +44,61 @@ namespace test
 
             Attack testAttaque = new Attack("Test", water, 160.0f);
 
-            Console.WriteLine(testAttaque.ComponentName);
-            Console.WriteLine(testAttaque.AttackStat);
-            Console.WriteLine(testAttaque.OTypes.ComponentName);
+            //Console.WriteLine(testAttaque.ComponentName);
+            //Console.WriteLine(testAttaque.AttackStat);
+            //Console.WriteLine(testAttaque.OTypes.ComponentName);
 
             GameObject testGameObject = new GameObject();
 
             testGameObject.AddComponent(testAttaque);
             testGameObject.AddComponent(water);
 
-            Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
-            Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
+            //Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
+            //Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
 
             CaseState caseState = new CaseState("testCase", true, false, true);
-            Console.WriteLine(caseState.ComponentName);
+            //Console.WriteLine(caseState.ComponentName);
 
             Objects testObjectKey = new Objects("testKey");
-            Console.WriteLine(testObjectKey.ComponentName);
-            Console.WriteLine(testObjectKey.IsKey);
+            //Console.WriteLine(testObjectKey.ComponentName);
+            //Console.WriteLine(testObjectKey.IsKey);
             
             Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
-            Console.WriteLine(testObjectBoost.ComponentName);
-            Console.WriteLine(testObjectBoost.IsKey);
-            Console.WriteLine(testObjectBoost.StatName);
-            Console.WriteLine(testObjectBoost.StatValue);
+            //Console.WriteLine(testObjectBoost.ComponentName);
+            //Console.WriteLine(testObjectBoost.IsKey);
+            //Console.WriteLine(testObjectBoost.StatName);
+            //Console.WriteLine(testObjectBoost.StatValue);
+            int x = 60;
+            int y = 15;
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine("P");
             while (true) {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
                 if (inputManager.IsKey((ConsoleKey)37))
                 {
-                    Console.WriteLine("aaaaa");
+                
+                    
+                    Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                    x -= 1;
+
                 }
                 if (inputManager.IsKey((ConsoleKey)38))
                 {
-                    Console.WriteLine("aaaaaaaa");
+                    Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                    y -= 1;
                 }
                 if (inputManager.IsKey((ConsoleKey)39))
                 {
-                    Console.WriteLine("a");
+                    Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                    x += 1;
                 }
                 if (inputManager.IsKey((ConsoleKey)40))
                 {
-                    Console.WriteLine("aaa");
+                    Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                    y += 1;
                 }
+                //Console.WriteLine(map.sText);
             }
         }
     }
