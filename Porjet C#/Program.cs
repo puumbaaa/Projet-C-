@@ -1,22 +1,56 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using Porjet_C_;
+
 namespace test
 {
     class Program
     {
 
-        static readonly string textFile = "C:\\Users\\gbravin\\source\\repos\\Porjet C#\\Map\\map.txt";
+        static readonly string textFile = "C:\\Users\\wdamour\\source\\repos\\Projet-C-\\Map\\map.txt";
 
 
         static void Main(string[] args)
         {
+            /*
             if (File.Exists(textFile))
             {
                 // Read entire text file content in one string
                 string text = File.ReadAllText(textFile);
                 Console.WriteLine(text);
-            }
+            }*/
+            Types water = new Types("water");
+            Types fire = new Types("fire");
+            Types grass = new Types("grass");
+            Types normal = new Types("normal");
+
+            water.AddWeakness(grass);
+            grass.AddWeakness(fire);
+            fire.AddWeakness(water);
+            
+            water.AddStrength(fire);
+            grass.AddStrength(water);
+            fire.AddStrength(grass);
+
+            normal.AddWeakness(water);
+            normal.AddWeakness(fire);
+            normal.AddWeakness(grass);
+
+            Attack testAttaque = new Attack("Test", water, 160.0f);
+
+            Console.WriteLine(testAttaque.ComponentName);
+            Console.WriteLine(testAttaque.AttackStat);
+            Console.WriteLine(testAttaque.OTypes.ComponentName);
+
+            GameObject testGameObject = new GameObject();
+
+            testGameObject.AddComponent(testAttaque);
+            testGameObject.AddComponent(water);
+
+            Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
+            Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
+            
             while (true) { }
         }
     }
