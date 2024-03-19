@@ -9,7 +9,7 @@ namespace Mapp
 {
     class FileReader : Map
     {
-        readonly string m_sTextFile = "C:\\Users\\gbravin\\source\\repos\\Porjet C#\\Map\\map.txt";
+        readonly string m_sTextFile = "..\\..\\..\\..\\Map\\map.txt";
 
         string m_sText = "";
 
