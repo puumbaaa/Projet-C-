@@ -8,7 +8,7 @@ namespace test
     class Program
     {
 
-        static readonly string textFile = "C:\\Users\\wdamour\\source\\repos\\Projet-C-\\Map\\map.txt";
+        //static readonly string textFile = "C:\\Users\\wdamour\\source\\repos\\Projet-C-\\Map\\map.txt";
 
 
         static void Main(string[] args)
@@ -50,6 +50,20 @@ namespace test
 
             Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
             Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
+
+            CaseState caseState = new CaseState("testCase", true, false, true);
+            Console.WriteLine(caseState.ComponentName);
+
+            Objects testObjectKey = new Objects("testKey");
+            Console.WriteLine(testObjectKey.ComponentName);
+            Console.WriteLine(testObjectKey.IsKey);
+            
+            Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
+            Console.WriteLine(testObjectBoost.ComponentName);
+            Console.WriteLine(testObjectBoost.IsKey);
+            Console.WriteLine(testObjectBoost.StatName);
+            Console.WriteLine(testObjectBoost.StatValue);
+
             
             while (true) { }
         }
