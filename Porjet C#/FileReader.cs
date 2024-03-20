@@ -9,7 +9,6 @@ namespace Mapp
 {
     class FileReader : Map
     {
-        readonly string m_sTextFile = "C:\\Users\\gbravin\\source\\repos\\Porjet C#\\Map\\map.txt";
 
         string m_sText = "";
 
@@ -19,14 +18,43 @@ namespace Mapp
             private set => m_sText = value;
         }
 
-
-        public void setFile()
+        public int GetLineCount(string file)
         {
-            if (File.Exists(m_sTextFile))
+            if (File.Exists(file))
             {
-                // Read entire text file content in one string
-                 m_sText = File.ReadAllText(m_sTextFile);
+                return File.ReadLines(file).Count();
+            }
+            else 
+            { 
+                return 0;
             }
         }
-    }
+
+
+        public void SetFile(string file)
+        {
+            if (File.Exists(file))
+            {
+                // Read entire text file content in one string
+                 m_sText = File.ReadAllText(file);
+            }
+        }
+
+        
+
+        public void PrintFile(string file)
+        {
+            SetFile(file);
+            Console.WriteLine(sText);
+        }
+
+        public void PrintFileLine(string file, int line)
+        {
+            string m_sText = File.ReadLines(file).Skip(line).Take(1).First();
+            Console.WriteLine(m_sText);
+            
+        }
+
+
+    } // End of class
 }
