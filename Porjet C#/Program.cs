@@ -19,12 +19,14 @@ namespace test
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
-            FileReader map = new FileReader();
-            map.printFile(sMap);
-
+            FileReader mapFile = new FileReader();
+            mapFile.printFile(sMap);
+            Map map = new Map();
+            map.mapSet(mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 30);
+
             InputManager inputManager = new InputManager();
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
             inputManager.Init(inputKeys);
@@ -81,42 +83,57 @@ namespace test
                 inputManager.Update(keyInfo);
                 if (x >= 1) 
                 {
-                    if (inputManager.IsKey((ConsoleKey)37))
+                    if (map._mapTab[x - 1, y]._IsWalkable)
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
-                        x -= 1;
+                        if (inputManager.IsKey((ConsoleKey)37))
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                            x -= 1;
+                        }
                     }
+                    
                 }
                     
                 if (y >= 1) 
                 {
-                    if (inputManager.IsKey((ConsoleKey)38))
+                    if (map._mapTab[x, y - 1]._IsWalkable)
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
-                        y -= 1;
+                        if (inputManager.IsKey((ConsoleKey)38))
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                            y -= 1;
+                        }
                     }
+                    
                 }   
                     
                 if (x <= 118) 
                 {
-                    if (inputManager.IsKey((ConsoleKey)39))
+                    if (map._mapTab[x + 1, y]._IsWalkable)
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
-                        x += 1;
+                        if (inputManager.IsKey((ConsoleKey)39))
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                            x += 1;
+                        }
                     }
+                    
                 }
                     
                 if (y <= 28) 
                 {
-                    if (inputManager.IsKey((ConsoleKey)40))
+                    if (map._mapTab[x, y + 1]._IsWalkable)
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
-                        y += 1;
+                        if (inputManager.IsKey((ConsoleKey)40))
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                            y += 1;
+                        }
                     }
                 }
 
                 Console.Clear();
-                map.printFile(sMap);
+                mapFile.printFile(sMap);
 
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("P");
