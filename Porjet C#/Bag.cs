@@ -9,12 +9,12 @@ namespace Porjet_C_
     internal class Bag
     {
         List<Objects> _objectsList;
-        int _nbKey;
-        int _nbPokeball;
-        int _nbPotion;
-        int _attackBoost;
-        int _defBoost;
-        int _speedBoost;
+        int _nbKey = 0;
+        int _nbPokeball = 0;
+        int _nbPotion = 0;
+        int _attackBoost = 0;
+        int _defBoost = 0;
+        int _speedBoost = 0;
 
         public List<Objects> ObjectsList { get => _objectsList; private set => _objectsList = new(10); }
         public int NbKey { get => _nbKey; private set => _nbKey = value; }
@@ -31,12 +31,22 @@ namespace Porjet_C_
         public void AddObject(Objects objects)
         {
             ObjectsList.Add(objects);
+            ObjZero();
             UpdateBag();
         }
-
+        public void ObjZero()
+        {
+            NbKey = 0;
+            NbPokeball = 0;
+            NbPotion = 0;
+            AttackBoost = 0;
+            DefBoost = 0;
+            SpeedBoost = 0;
+        }
         public void RemoveObject(Objects objects) 
         {
             ObjectsList.Remove(objects);
+            ObjZero();
             UpdateBag();
         }
 
@@ -46,22 +56,22 @@ namespace Porjet_C_
             {
                 if (ObjectsList[i].StatName == "attack")
                 {
-                    AttackBoost++;
+                    ++AttackBoost;
                 }else if (ObjectsList[i].StatName == "def")
                 {
-                    DefBoost++;
+                    ++DefBoost;
                 }else if (ObjectsList[i].StatName == "potion")
                 {
-                    NbPotion++;
+                    ++NbPotion;
                 }else if (ObjectsList[i].StatName == "speed")
                 {
-                    SpeedBoost++;
+                    ++SpeedBoost;
                 }else if (ObjectsList[i].IsKey)
                 {
-                    NbKey++;
+                   ++ NbKey;
                 }else if (ObjectsList[i].IsPokeball)
                 {
-                    NbPokeball++;
+                    ++NbPokeball;
                 }
             }
         }

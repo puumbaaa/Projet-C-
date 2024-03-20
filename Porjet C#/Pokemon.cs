@@ -71,9 +71,10 @@ namespace Porjet_C_
             ListAttacks.Add(attack);
         }
 
-        public void UseObject(Objects obj)
+        public void UseObject(Objects obj, Bag bag)
         {
             ListUsedObjects.Add(obj);
+            bag.RemoveObject(obj);
             if (obj.StatName=="potion")
             {
                 Heal(obj);
