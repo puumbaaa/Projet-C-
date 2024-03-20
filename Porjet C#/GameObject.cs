@@ -18,7 +18,7 @@ namespace Porjet_C_
         }
         public void AddComponent(Component component)
         {
-            _componentsList.Add(component);
+            ComponentsList.Add(component);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Porjet_C_
         float _totalHealth;
         bool _isKO;
         List<Attack> _listAttacks;
+        List<Objects> _listUsedObjects;
 
 
         public string Name { get => _name; private set => _name = value; }
@@ -36,6 +37,7 @@ namespace Porjet_C_
         public float TotalHealth { get => _totalHealth; private set => _totalHealth = value; }
         public bool IsKO { get => _isKO; private set => _isKO = value; }
         public List<Attack> ListAttacks { get => _listAttacks; private set => _listAttacks = new(10); }
+        public List<Objects> ListUsedObjects { get => _listUsedObjects; private set => _listUsedObjects = new(10); }
 
         public Pokemon(string name, int level, int currentExp, int totalExp, Types types1, float attackStat, float defStat, float speedStat, float currentHealth, float totalHealth, bool isKO)
         {
@@ -61,10 +63,16 @@ namespace Porjet_C_
             TotalHealth = totalHealth;
             IsKO = isKO;
             ListAttacks = new List<Attack>();
+            ListUsedObjects = new List<Objects>();
         }
         public void setAttck( Attack attack)
         {
             ListAttacks.Add(attack);
+        }
+
+        public void UseObject(Objects obj)
+        {
+            ListUsedObjects.Add(obj);
         }
 
         public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject) 
@@ -93,6 +101,13 @@ namespace Porjet_C_
             }
 
             totalDamage -= DefStat / 100;
+            for (int i = 0; i < ListUsedObjects.Count; i++)
+            {
+                if (ListUsedObjects[i].StatName == "def")
+                {
+                    totalDamage -= ListUsedObjects[i].StatValue;
+                }
+            }
             if (CurrentHealth - totalDamage < 0)
             {
                 CurrentHealth = 0;
@@ -103,6 +118,15 @@ namespace Porjet_C_
                 CurrentHealth -= totalDamage;
             }
 
+        }
+
+        public void Heal(Objects potion)
+        {
+            CurrentHealth += potion.StatValue;
+            if (CurrentHealth > TotalHealth) 
+            {
+                CurrentHealth = TotalHealth;
+            }
         }
 
         public void GetExp(Pokemon pokemonEnemy)
