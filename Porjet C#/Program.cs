@@ -22,6 +22,7 @@ namespace test
             FileReader mapFile = new FileReader();
             mapFile.printFile(sMap);
             Map map = new Map();
+            Console.WriteLine(mapFile.sText.Length);
             map.mapSet(mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
@@ -81,37 +82,37 @@ namespace test
             while (true) {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
-                if (x >= 1) 
+                if (inputManager.IsKey((ConsoleKey)37))
                 {
-                    if (map._mapTab[x - 1, y]._IsWalkable)
+                    if (x >= 1) 
                     {
-                        if (inputManager.IsKey((ConsoleKey)37))
+                        if (map._mapTab[y, x - 1]._IsWalkable)
                         {
+                        
                             Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
                             x -= 1;
                         }
                     }
                     
                 }
-                    
-                if (y >= 1) 
+                if (inputManager.IsKey((ConsoleKey)38))
                 {
-                    if (map._mapTab[x, y - 1]._IsWalkable)
+                    if (y >= 1) 
                     {
-                        if (inputManager.IsKey((ConsoleKey)38))
+                        if (map._mapTab[y - 1, x]._IsWalkable)
                         {
+                        
                             Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
                             y -= 1;
                         }
                     }
                     
-                }   
-                    
-                if (x <= 118) 
+                }
+                if (inputManager.IsKey((ConsoleKey)39))
                 {
-                    if (map._mapTab[x + 1, y]._IsWalkable)
+                    if (x <= 118) 
                     {
-                        if (inputManager.IsKey((ConsoleKey)39))
+                        if (map._mapTab[y, x + 1]._IsWalkable)
                         {
                             Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
                             x += 1;
@@ -119,13 +120,13 @@ namespace test
                     }
                     
                 }
-                    
-                if (y <= 28) 
+                if (inputManager.IsKey((ConsoleKey)40))
                 {
-                    if (map._mapTab[x, y + 1]._IsWalkable)
+                    if (y <= 28) 
                     {
-                        if (inputManager.IsKey((ConsoleKey)40))
+                        if (map._mapTab[y + 1, x]._IsWalkable)
                         {
+                        
                             Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
                             y += 1;
                         }
