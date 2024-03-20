@@ -72,33 +72,51 @@ namespace test
             int y = 15;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("P");
+            Console.CursorVisible = false;
             while (true) {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
-                if (inputManager.IsKey((ConsoleKey)37))
+                if (x >= 1) 
                 {
-                
+                    if (inputManager.IsKey((ConsoleKey)37))
+                    {
+                        Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                        x -= 1;
+                    }
+                }
                     
-                    Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
-                    x -= 1;
+                if (y >= 1) 
+                {
+                    if (inputManager.IsKey((ConsoleKey)38))
+                    {
+                        Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                        y -= 1;
+                    }
+                }   
+                    
+                if (x <= 118) 
+                {
+                    if (inputManager.IsKey((ConsoleKey)39))
+                    {
+                        Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                        x += 1;
+                    }
+                }
+                    
+                if (y <= 28) 
+                {
+                    if (inputManager.IsKey((ConsoleKey)40))
+                    {
+                        Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                        y += 1;
+                    }
+                }
 
-                }
-                if (inputManager.IsKey((ConsoleKey)38))
-                {
-                    Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
-                    y -= 1;
-                }
-                if (inputManager.IsKey((ConsoleKey)39))
-                {
-                    Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
-                    x += 1;
-                }
-                if (inputManager.IsKey((ConsoleKey)40))
-                {
-                    Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
-                    y += 1;
-                }
-                //Console.WriteLine(map.sText);
+                Console.Clear();
+                Console.WriteLine(map.sText);
+                Console.SetCursorPosition(x, y);
+                Console.WriteLine("P");
+                Console.CursorVisible = false;
             }
         }
     }
