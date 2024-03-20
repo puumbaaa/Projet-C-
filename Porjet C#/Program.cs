@@ -3,7 +3,7 @@
 using Mapp;
 using Input;
 using System;
-
+using Grid;
 using Porjet_C_;
 
 namespace test
@@ -11,16 +11,20 @@ namespace test
     class Program
     {
 
-    
+
 
         static void Main(string[] args)
         {
+
+
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
-            string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
+            string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
             FileReader map = new FileReader();
-            map.printFile(sMap);
+            GridClass grid = new GridClass();
+            map.PrintFile(sCombat);
+
 
 
             Console.SetCursorPosition(0, 0);
@@ -36,7 +40,7 @@ namespace test
             water.AddWeakness(grass);
             grass.AddWeakness(fire);
             fire.AddWeakness(water);
-            
+
             water.AddStrength(fire);
             grass.AddStrength(water);
             fire.AddStrength(grass);
@@ -65,7 +69,7 @@ namespace test
             Objects testObjectKey = new Objects("testKey");
             //Console.WriteLine(testObjectKey.ComponentName);
             //Console.WriteLine(testObjectKey.IsKey);
-            
+
             Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
             //Console.WriteLine(testObjectBoost.ComponentName);
             //Console.WriteLine(testObjectBoost.IsKey);
@@ -76,10 +80,11 @@ namespace test
             Console.SetCursorPosition(x, y);
             Console.WriteLine("P");
             Console.CursorVisible = false;
-            while (true) {
+            while (true)
+            {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
-                if (x >= 1) 
+                if (x >= 1)
                 {
                     if (inputManager.IsKey((ConsoleKey)37))
                     {
@@ -87,17 +92,17 @@ namespace test
                         x -= 1;
                     }
                 }
-                    
-                if (y >= 1) 
+
+                if (y >= 1)
                 {
                     if (inputManager.IsKey((ConsoleKey)38))
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
                         y -= 1;
                     }
-                }   
-                    
-                if (x <= 118) 
+                }
+
+                if (x <= 118)
                 {
                     if (inputManager.IsKey((ConsoleKey)39))
                     {
@@ -105,8 +110,8 @@ namespace test
                         x += 1;
                     }
                 }
-                    
-                if (y <= 28) 
+
+                if (y <= 28)
                 {
                     if (inputManager.IsKey((ConsoleKey)40))
                     {
@@ -116,13 +121,21 @@ namespace test
                 }
 
                 Console.Clear();
-                map.printFile(sMap);
+                map.PrintFile(sCombat);
 
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine("P");
+
+
+                for (int i = 0; i < map.GetLineCount(sMonster1); i++)
+                {
+                    Console.SetCursorPosition(grid.CombatGrid[3, 1], grid.CombatGrid[1, 0] + i);
+                    map.PrintFileLine(sMonster1, i);
+                }
+
+
+
+
                 Console.CursorVisible = false;
             }
         }
     }
 }
-    

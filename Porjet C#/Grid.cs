@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Porjet_C_
+namespace Grid
 {
-    public class Grid
+    class GridClass
     {
-        int[,] CombatGrid = new int[,] {
+
+        public int[,] CombatGrid = new int[,] {
 
             // Ally
             { 2, 3 }, // Case 0
