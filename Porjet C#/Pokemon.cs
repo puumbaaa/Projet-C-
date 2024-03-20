@@ -63,7 +63,7 @@ namespace Porjet_C_
             TotalHealth = totalHealth;
             IsKO = isKO;
             ListAttacks = new List<Attack>();
-            ListUsedObjects = new List<Objects>();
+            ListUsedObjects = new List<Objects>(1);
         }
         public void setAttck( Attack attack)
         {
