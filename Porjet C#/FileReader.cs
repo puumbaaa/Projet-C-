@@ -9,7 +9,6 @@ namespace Mapp
 {
     class FileReader : Map
     {
-        readonly string m_sTextFile = "..\\..\\..\\..\\Map\\map.txt";
 
         string m_sText = "";
 
@@ -20,13 +19,19 @@ namespace Mapp
         }
 
 
-        public void setFile()
+        public void setFile(string file)
         {
-            if (File.Exists(m_sTextFile))
+            if (File.Exists(file))
             {
                 // Read entire text file content in one string
-                 m_sText = File.ReadAllText(m_sTextFile);
+                 m_sText = File.ReadAllText(file);
             }
+        }
+
+        public void printFile(string file)
+        {
+            setFile(file);
+            Console.WriteLine(sText);
         }
     }
 }

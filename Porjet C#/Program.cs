@@ -15,11 +15,14 @@ namespace test
 
         static void Main(string[] args)
         {
+            string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
+            string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
+            string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
-            
             FileReader map = new FileReader();
-            map.setFile();
-            Console.WriteLine(map.sText);
+            map.printFile(sMap);
+
+
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 30);
             InputManager inputManager = new InputManager();
@@ -113,7 +116,8 @@ namespace test
                 }
 
                 Console.Clear();
-                Console.WriteLine(map.sText);
+                map.printFile(sMap);
+
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("P");
                 Console.CursorVisible = false;
