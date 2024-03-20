@@ -14,6 +14,7 @@ namespace Porjet_C_
         int _nbPotion;
         int _attackBoost;
         int _defBoost;
+        int _speedBoost;
 
         public List<Objects> ObjectsList { get => _objectsList; private set => _objectsList = new(10); }
         public int NbKey { get => _nbKey; private set => _nbKey = value; }
@@ -21,6 +22,7 @@ namespace Porjet_C_
         public int NbPotion { get => _nbPotion; private set => _nbPotion = value; }
         public int AttackBoost { get => _attackBoost; private set => _attackBoost = value; }
         public int DefBoost { get => _defBoost; private set => _defBoost = value; }
+        public int SpeedBoost { get => _speedBoost; private set => _speedBoost = value; }
 
         public Bag()
         {
@@ -51,6 +53,9 @@ namespace Porjet_C_
                 }else if (ObjectsList[i].StatName == "potion")
                 {
                     NbPotion++;
+                }else if (ObjectsList[i].StatName == "speed")
+                {
+                    SpeedBoost++;
                 }else if (ObjectsList[i].IsKey)
                 {
                     NbKey++;

@@ -14,9 +14,12 @@ namespace Porjet_C_
         int _totalExp;
         Types _types1;
         //Types _types2;
-        float _attackStat;
-        float _defStat;
-        float _speedStat;
+        float _attackStatBase;
+        float _attackStatInFight;
+        float _defStatBase;
+        float _defStatInFight;
+        float _speedStatBase;
+        float _speedStatInFight;
         float _currentHealth;
         float _totalHealth;
         bool _isKO;
@@ -30,9 +33,12 @@ namespace Porjet_C_
         public int TotalExp { get => _totalExp; private set => _totalExp = value; }
         public Types Types1 { get => _types1; private set => _types1 = value; }
         //public Types Types2 { get => _types2; private set => _types2 = value; }
-        public float AttackStat { get => _attackStat; private set => _attackStat = value; }
-        public float DefStat { get => _defStat; private set => _defStat = value; }
-        public float SpeedStat { get => _speedStat; private set => _speedStat = value; }
+        public float AttackStatBase { get => _attackStatBase; private set => _attackStatBase = value; }
+        public float DefStatBase { get => _defStatBase; private set => _defStatBase = value; }
+        public float SpeedStatBase { get => _speedStatBase; private set => _speedStatBase = value; }
+        public float AttackStatInFight { get => _attackStatInFight; private set => _attackStatInFight = value; }
+        public float DefStatInFight { get => _defStatInFight; private set => _defStatInFight = value; }
+        public float SpeedStatInFight { get => _speedStatInFight; private set => _speedStatInFight = value; }
         public float CurrentHealth { get => _currentHealth; private set => _currentHealth = value; }
         public float TotalHealth { get => _totalHealth; private set => _totalHealth = value; }
         public bool IsKO { get => _isKO; private set => _isKO = value; }
@@ -46,25 +52,20 @@ namespace Porjet_C_
             CurrentExp = currentExp;
             TotalExp = totalExp;
             Types1 = types1;
-            AttackStat = attackStat;
-            DefStat = defStat;
-            SpeedStat = speedStat;
-            CurrentHealth = currentHealth;
-            TotalHealth = totalHealth;
-            Name = name;
-            Level = level;
-            CurrentExp = currentExp;
-            TotalExp = totalExp;
-            Types1 = types1;
-            AttackStat = attackStat;
-            DefStat = defStat;
-            SpeedStat = speedStat;
+            AttackStatBase = attackStat;
+            AttackStatInFight = attackStat;
+            DefStatBase = defStat;
+            DefStatInFight = defStat;
+            SpeedStatBase = speedStat;
+            SpeedStatInFight = speedStat;
             CurrentHealth = currentHealth;
             TotalHealth = totalHealth;
             IsKO = isKO;
             ListAttacks = new List<Attack>();
             ListUsedObjects = new List<Objects>(1);
+            StatBeginingFight();
         }
+
         public void setAttck( Attack attack)
         {
             ListAttacks.Add(attack);
@@ -73,7 +74,30 @@ namespace Porjet_C_
         public void UseObject(Objects obj)
         {
             ListUsedObjects.Add(obj);
+            if (obj.StatName=="potion")
+            {
+                Heal(obj);
+            }
+            else if (obj.StatName=="attack")
+            {
+                AttackStatInFight += obj.StatValue;   
+            }else if (obj.StatName=="def")
+            {
+                DefStatInFight += obj.StatValue;   
+            }else if (obj.StatName=="speed")
+            {
+                SpeedStatInFight += obj.StatValue;   
+            }
         }
+
+        public void StatBeginingFight()
+        {
+            AttackStatInFight = AttackStatBase;
+            DefStatInFight = DefStatBase;
+            SpeedStatInFight = SpeedStatBase;
+        }
+
+
 
         public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject)//if enemy has object
         {
@@ -87,7 +111,7 @@ namespace Porjet_C_
 
         public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, float totalDamage = 0) //if enemy has no object 
         {
-            totalDamage += (pokemonEnemy.AttackStat + EnemyAttack.AttackStat)/100;
+            totalDamage += (pokemonEnemy.AttackStatInFight + EnemyAttack.AttackStat)/100;
             //attaque efficace contre notre pokemon
             for (int i = 0; i < EnemyAttack.OTypes.StrengthType.Count; i++)
             {
@@ -106,7 +130,7 @@ namespace Porjet_C_
                 }
             }
 
-            totalDamage -= DefStat / 100;
+            totalDamage -= DefStatInFight / 100;
             for (int i = 0; i < ListUsedObjects.Count; i++)
             {
                 if (ListUsedObjects[i].StatName == "def")
@@ -118,6 +142,7 @@ namespace Porjet_C_
             {
                 CurrentHealth = 0;
                 IsKO = true;
+                StatBeginingFight();
             }
             else
             {
@@ -145,9 +170,9 @@ namespace Porjet_C_
                     CurrentExp -= TotalExp;
                     Level += 1;
                     TotalExp += TotalExp / 10;
-                    AttackStat += AttackStat / 10;
-                    DefStat += DefStat / 10;
-                    SpeedStat += SpeedStat / 10;
+                    AttackStatBase += AttackStatBase / 10;
+                    DefStatBase += DefStatBase / 10;
+                    SpeedStatBase += SpeedStatBase / 10;
                     CurrentHealth += TotalHealth / 10;
                     TotalHealth += TotalHealth / 10;
                 }
