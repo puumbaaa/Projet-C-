@@ -44,6 +44,7 @@ namespace test
             Console.WriteLine(testAttaque.OTypes.ComponentName);
 
             Objects potion = new Objects("potion", "potion", 150.0f);
+            Objects def = new Objects("def", "def", 100.0f);
 
             Pokemon testPokemon = new Pokemon("pikachu", 12, 10, 100, water, 150, 100, 20, 1500, 1500, false);
             Pokemon testEnemyPokemon = new Pokemon("NotPikachu", 10, 10, 100, fire, 200000000000, 100, 20, 1500, 1500, false);
@@ -56,6 +57,12 @@ namespace test
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
             testPokemon.GetExp(testEnemyPokemon);
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
+            testPokemon.UseObject(def);
+            testPokemon.UseObject(def);
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
+            testPokemon.StatBeginingFight();
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
 
             while (true) { }
         }
