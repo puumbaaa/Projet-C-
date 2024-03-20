@@ -9,6 +9,8 @@ namespace Grid
     class GridClass
     {
 
+        public int[,] CombatGrid = new int[,] {
+
         int m_Case;
         int[,] combatGrid;
         int[] gridSlots;

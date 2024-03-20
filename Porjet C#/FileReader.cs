@@ -30,6 +30,18 @@ namespace Mapp
             }
         }
 
+        public int GetLineCount(string file)
+        {
+            if (File.Exists(file))
+            {
+                return File.ReadLines(file).Count();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
 
         public void SetFile(string file)
         {
