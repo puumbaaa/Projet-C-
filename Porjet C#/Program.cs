@@ -53,7 +53,7 @@ namespace test
             Console.WriteLine($"Name : {testEnemyPokemon.Name}, Level : {testEnemyPokemon.Level} , Current exp : {testEnemyPokemon.CurrentExp}, total exp : {testEnemyPokemon.TotalExp}, current health : {testEnemyPokemon.CurrentHealth}, total health : {testEnemyPokemon.TotalHealth}");
             testPokemon.TakeDamage(testEnemyPokemon, testAttaque);
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            testPokemon.Heal(potion);
+            testPokemon.UseObject(potion);
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
             testPokemon.GetExp(testEnemyPokemon);
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
@@ -63,7 +63,10 @@ namespace test
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
             testPokemon.StatBeginingFight();
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-
+            for (int i = 0; i < testPokemon.ListUsedObjects.Count; i++)
+            {
+                Console.WriteLine(testPokemon.ListUsedObjects[i].ComponentName);
+            }
             while (true) { }
         }
     }
