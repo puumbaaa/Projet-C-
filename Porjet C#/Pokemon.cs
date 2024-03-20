@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal struct Pokemon
+    internal class Pokemon
     {
-        private string _name;
-        private int _level;
-        private int _currentExp;
-        private int _totalExp;
-        private Types _types1;
-        //private Types _types2;
-        private float _attackStat;
-        private float _defStat;
-        private float _speedStat;
-        private float _currentHealth;
-        private float _totalHealth;
+        string _name;
+        int _level;
+        int _currentExp;
+        int _totalExp;
+        Types _types1;
+        //Types _types2;
+        float _attackStat;
+        float _defStat;
+        float _speedStat;
+        float _currentHealth;
+        float _totalHealth;
+        bool _isKO;
+        List<Attack> _listAttacks;
 
 
         public string Name { get => _name; private set => _name = value; }
@@ -32,5 +34,96 @@ namespace Porjet_C_
         public float SpeedStat { get => _speedStat; private set => _speedStat = value; }
         public float CurrentHealth { get => _currentHealth; private set => _currentHealth = value; }
         public float TotalHealth { get => _totalHealth; private set => _totalHealth = value; }
+        public bool IsKO { get => _isKO; private set => _isKO = value; }
+        public List<Attack> ListAttacks { get => _listAttacks; private set => _listAttacks = new(10); }
+
+        public Pokemon(string name, int level, int currentExp, int totalExp, Types types1, float attackStat, float defStat, float speedStat, float currentHealth, float totalHealth, bool isKO)
+        {
+            Name = name;
+            Level = level;
+            CurrentExp = currentExp;
+            TotalExp = totalExp;
+            Types1 = types1;
+            AttackStat = attackStat;
+            DefStat = defStat;
+            SpeedStat = speedStat;
+            CurrentHealth = currentHealth;
+            TotalHealth = totalHealth;
+            Name = name;
+            Level = level;
+            CurrentExp = currentExp;
+            TotalExp = totalExp;
+            Types1 = types1;
+            AttackStat = attackStat;
+            DefStat = defStat;
+            SpeedStat = speedStat;
+            CurrentHealth = currentHealth;
+            TotalHealth = totalHealth;
+            IsKO = isKO;
+            ListAttacks = new List<Attack>();
+        }
+        public void setAttck( Attack attack)
+        {
+            ListAttacks.Add(attack);
+        }
+
+        public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject) 
+        {
+            float totalDamage = (pokemonEnemy.AttackStat + EnemyAttack.AttackStat)/100;
+            if (EnemyObject.StatName=="attack")
+            {
+                totalDamage += EnemyObject.StatValue/100;    
+            }
+            //attaque efficace contre notre pokemon
+            for (int i = 0; i < EnemyAttack.OTypes.StrengthType.Count; i++)
+            {
+                if (EnemyAttack.OTypes.StrengthType[i] == Types1 /*|| EnemyAttack.OTypes.StrengthType[i] == Types2*/)
+                {
+                    totalDamage *= 2;
+                }
+            }
+
+            //attaque efficace contre notre pokemon
+            for (int i = 0; i < EnemyAttack.OTypes.WeaknessType.Count; i++)
+            {
+                if (EnemyAttack.OTypes.WeaknessType[i] == Types1 /*|| EnemyAttack.OTypes.WeaknessType[i] == Types2*/)
+                {
+                    totalDamage *= 0.5f;
+                }
+            }
+
+            totalDamage -= DefStat / 100;
+            if (CurrentHealth - totalDamage < 0)
+            {
+                CurrentHealth = 0;
+                IsKO = true;
+            }
+            else
+            {
+                CurrentHealth -= totalDamage;
+            }
+
+        }
+
+        public void GetExp(Pokemon pokemonEnemy)
+        {
+            if (Level < 100) 
+            {
+                CurrentExp += pokemonEnemy.Level * 200;
+                if (CurrentExp >= TotalExp)
+                {
+                    CurrentExp -= TotalExp;
+                    Level += 1;
+                    TotalExp += TotalExp / 10;
+                    AttackStat += AttackStat / 10;
+                    DefStat += DefStat / 10;
+                    SpeedStat += SpeedStat / 10;
+                    CurrentHealth += TotalHealth / 10;
+                    TotalHealth += TotalHealth / 10;
+                }
+            }
+        }
+
+
     }
 }

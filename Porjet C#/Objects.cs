@@ -11,10 +11,12 @@ namespace Porjet_C_
         string _statName;
         float _statValue;
         bool _isKey = false;
+        bool _isPokeball = false;
 
         public string StatName { get => _statName; private set => _statName = value; }
         public float StatValue { get => _statValue; private set => _statValue = value; }
         public bool IsKey { get => _isKey; set => _isKey = value; }
+        public bool IsPokeball { get => _isPokeball; set => _isPokeball = value; }
 
         public Objects(string name, string statName, float statValue) : base(name) 
         {
@@ -22,9 +24,10 @@ namespace Porjet_C_
             StatValue = statValue;
         } 
 
-        public Objects(string name) : base(name) 
+        public Objects(string name, bool isKey) : base(name) 
         {
-            IsKey = true;
+            IsKey = isKey;
+            IsPokeball= !isKey;
         }
     }
 }
