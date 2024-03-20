@@ -48,7 +48,7 @@ namespace Porjet_C_
                 }else if (ObjectsList[i].StatName == "def")
                 {
                     DefBoost++;
-                }else if (ObjectsList[i].IsPotion)
+                }else if (ObjectsList[i].StatName == "potion")
                 {
                     NbPotion++;
                 }else if (ObjectsList[i].IsKey)
