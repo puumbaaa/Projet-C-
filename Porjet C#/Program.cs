@@ -54,6 +54,8 @@ namespace test
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
             testPokemon.Heal(potion);
             Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
+            testPokemon.GetExp(testEnemyPokemon);
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
 
             while (true) { }
         }

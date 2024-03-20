@@ -140,7 +140,7 @@ namespace Porjet_C_
             if (Level < 100) 
             {
                 CurrentExp += pokemonEnemy.Level * 200;
-                if (CurrentExp >= TotalExp)
+                while (CurrentExp >= TotalExp)
                 {
                     CurrentExp -= TotalExp;
                     Level += 1;
