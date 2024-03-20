@@ -37,34 +37,20 @@ namespace test
             normal.AddWeakness(fire);
             normal.AddWeakness(grass);
 
-            Attack testAttaque = new Attack("Test", water, 160.0f);
+            Attack testAttaque = new Attack("Test", grass, 160.0f);
 
             Console.WriteLine(testAttaque.ComponentName);
             Console.WriteLine(testAttaque.AttackStat);
             Console.WriteLine(testAttaque.OTypes.ComponentName);
 
-            GameObject testGameObject = new GameObject();
+            Pokemon testPokemon = new Pokemon("pikachu", 12, 10, 100, water, 150, 100, 20, 1500, 1500, false);
+            Pokemon testEnemyPokemon = new Pokemon("NotPikachu", 10, 10, 100, fire, 200, 100, 20, 1500, 1500, false);
 
-            testGameObject.AddComponent(testAttaque);
-            testGameObject.AddComponent(water);
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
+            Console.WriteLine($"Name : {testEnemyPokemon.Name}, Level : {testEnemyPokemon.Level} , Current exp : {testEnemyPokemon.CurrentExp}, total exp : {testEnemyPokemon.TotalExp}, current health : {testEnemyPokemon.CurrentHealth}, total health : {testEnemyPokemon.TotalHealth}");
+            testPokemon.TakeDamage(testEnemyPokemon, testAttaque);
+            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
 
-            Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
-            Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
-
-            CaseState caseState = new CaseState("testCase", true, false, true);
-            Console.WriteLine(caseState.ComponentName);
-
-            Objects testObjectKey = new Objects("testKey");
-            Console.WriteLine(testObjectKey.ComponentName);
-            Console.WriteLine(testObjectKey.IsKey);
-            
-            Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
-            Console.WriteLine(testObjectBoost.ComponentName);
-            Console.WriteLine(testObjectBoost.IsKey);
-            Console.WriteLine(testObjectBoost.StatName);
-            Console.WriteLine(testObjectBoost.StatValue);
-
-            
             while (true) { }
         }
     }

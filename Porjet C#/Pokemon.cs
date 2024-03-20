@@ -75,13 +75,19 @@ namespace Porjet_C_
             ListUsedObjects.Add(obj);
         }
 
-        public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject) 
+        public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject)//if enemy has object
         {
-            float totalDamage = (pokemonEnemy.AttackStat + EnemyAttack.AttackStat)/100;
-            if (EnemyObject.StatName=="attack")
+            float totalDamage = 0;
+            if (EnemyObject.StatName == "attack")
             {
-                totalDamage += EnemyObject.StatValue/100;    
+                totalDamage += EnemyObject.StatValue / 100;
             }
+            TakeDamage(pokemonEnemy, EnemyAttack, totalDamage);
+        }
+
+        public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, float totalDamage = 0) //if enemy has no object 
+        {
+            totalDamage += (pokemonEnemy.AttackStat + EnemyAttack.AttackStat)/100;
             //attaque efficace contre notre pokemon
             for (int i = 0; i < EnemyAttack.OTypes.StrengthType.Count; i++)
             {
@@ -91,7 +97,7 @@ namespace Porjet_C_
                 }
             }
 
-            //attaque efficace contre notre pokemon
+            //attaque non efficace contre notre pokemon
             for (int i = 0; i < EnemyAttack.OTypes.WeaknessType.Count; i++)
             {
                 if (EnemyAttack.OTypes.WeaknessType[i] == Types1 /*|| EnemyAttack.OTypes.WeaknessType[i] == Types2*/)
