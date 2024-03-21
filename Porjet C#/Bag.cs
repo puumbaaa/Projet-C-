@@ -9,12 +9,12 @@ namespace Porjet_C_
     internal class Bag
     {
         List<Objects> _objectsList;
-        int _nbKey = 0;
-        int _nbPokeball = 0;
-        int _nbPotion = 0;
-        int _attackBoost = 0;
-        int _defBoost = 0;
-        int _speedBoost = 0;
+        int _nbKey;
+        int _nbPokeball;
+        int _nbPotion;
+        int _attackBoost;
+        int _defBoost;
+        int _speedBoost;
 
         public List<Objects> ObjectsList { get => _objectsList; private set => _objectsList = new(10); }
         public int NbKey { get => _nbKey; private set => _nbKey = value; }
@@ -27,6 +27,12 @@ namespace Porjet_C_
         public Bag()
         {
             ObjectsList = new List<Objects>();
+            NbKey = 0;
+            NbPokeball = 0;
+            NbPotion = 0;
+            AttackBoost = 0;
+            DefBoost = 0;
+            SpeedBoost = 0;
         }
         public void AddObject(Objects objects)
         {

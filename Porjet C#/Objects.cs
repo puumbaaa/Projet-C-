@@ -11,8 +11,8 @@ namespace Porjet_C_
     {
         string _statName;
         float _statValue;
-        bool _isKey = false;
-        bool _isPokeball = false;
+        bool _isKey;
+        bool _isPokeball;
 
         public string StatName { get => _statName; private set => _statName = value; }
         public float StatValue { get => _statValue; private set => _statValue = value; }
@@ -23,6 +23,8 @@ namespace Porjet_C_
         {
             StatName = statName;
             StatValue = statValue;
+            IsKey = false;
+            IsPokeball = false;
         } 
 
         public Objects(string name, bool isKey, bool isPokeball) : base(name) 
