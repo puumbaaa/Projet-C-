@@ -21,8 +21,9 @@ namespace test
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
             FileReader map = new FileReader();
-            map.printFile(sMap);
-
+            GridClass grid = new GridClass();
+            map.PrintFile(sCombat);
+            
 
 
             Console.SetCursorPosition(0, 0);
@@ -118,6 +119,12 @@ namespace test
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
                         x += 1;
+
+                        if (grid.m_Case + 1 <= 17)
+                        {
+                            grid.m_Case += 1;
+                        }
+
                     }
                 }
 
@@ -127,6 +134,12 @@ namespace test
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
                         y += 1;
+
+                        if (grid.m_Case + 3 <= 17)
+                        {
+                            grid.m_Case += 3;
+                        }
+
                     }
                 }
 
@@ -134,14 +147,14 @@ namespace test
                 map.PrintFile(sCombat);
 
 
-
+                grid.m_Case = 0;
                 for (int i = 0; i < map.GetLineCount(sMonster1); i++)
                 {
-                    Console.SetCursorPosition(grid.CombatGrid[3, 1], grid.CombatGrid[1, 0] + i);
+                    Console.SetCursorPosition(grid.gridSet[grid.m_Case, 0], grid.gridSet[grid.m_Case, 1] + i);
                     map.PrintFileLine(sMonster1, i);
                 }
 
-
+                
 
 
                 Console.CursorVisible = false;
