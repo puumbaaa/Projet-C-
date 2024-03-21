@@ -9,35 +9,103 @@ namespace Grid
     class GridClass
     {
 
-        public int[,] CombatGrid = new int[,] {
+        int m_Case;
+        int[,] combatGrid;
+        int[] gridSlots;
 
-            // Ally
-            { 2, 3 }, // Case 0
-            { 2, 22 }, // Case 1
-            { 2, 41 }, // Case 2
 
-            { 11, 3 }, // Case 3
-            { 11, 22 }, // Case 4
-            { 11, 41 }, // Case 5
+        /*//----------------------------------------------------------------------------------|
+        |                                                                                     |
+        |                                                                                     |
+        |                                   Set Grids                                         |
+        |                                                                                     |
+        |                                                                                     |
+        *///----------------------------------------------------------------------------------|
 
-            { 20 , 3 }, // Case 6
-            { 20 , 22 }, // Case 7
-            { 20 , 41 }, // Case 8
 
-            //Enemy
-            { 2, 65 }, // Case 9
-            { 2, 84 }, // Case 10
-            { 2, 103 }, // Case 11
+        void SetCombatGrid()
+        {
+            
 
-            { 11, 65 }, // Case 12
-            { 11, 84 }, // Case 13
-            { 11, 103 }, // Case 14
+            combatGrid = new int[,] {
 
-            { 20 , 65 }, // Case 15
-            { 20 , 84 }, // Case 16
-            { 20 , 103 } // Case 17
+                // Ally
+                {3, 2}, // Case 0
+                {22, 2}, // Case 1
+                {41, 2}, // Case 2
+
+                {3, 11}, // Case 3
+                {22, 11}, // Case 4
+                {41, 11}, // Case 5
+
+                {3, 20}, // Case 6
+                {22, 20}, // Case 7
+                {41, 20}, // Case 8
+
+                //Enemy
+                {65, 2}, // Case 9
+                {84, 2}, // Case 10
+                {103, 2}, // Case 11
+
+                {65, 11}, // Case 12
+                {84, 11}, // Case 13
+                {103, 11}, // Case 14
+
+                {65, 20}, // Case 15
+                {84, 20}, // Case 16
+                {103, 20} // Case 17
 
             };
+        }
+        void SetCombatSlots()
+        {
+            gridSlots = new int[17];
+            for (int i = 0; i <= 17; i++)
+            {
+                gridSlots[i] = 0;
+            }
+        }
+
+
+        /*//----------------------------------------------------------------------------------|
+        |                                                                                     |
+        |                                                                                     |
+        |                                    Get Grids                                        |
+        |                                                                                     |
+        |                                                                                     |
+        *///----------------------------------------------------------------------------------|
+        public int[,] GetCombatGrid()
+        {
+            return combatGrid;
+        }
+
+        public int[] GetSlotGrid()
+        {
+            return gridSlots;
+        }
+
+        public int GetSlot(int i)
+        {
+            return gridSlots[i];
+        }
+
+
+
+        /*//----------------------------------------------------------------------------------|
+        |                                                                                     |
+        |                                                                                     |
+        |                                      Generate Grids                                 |
+        |                                                                                     |
+        |                                                                                     |
+        *///----------------------------------------------------------------------------------|
+
+        public void GenerateGrids()
+        {
+            SetCombatGrid();
+            SetCombatSlots();
+        }
+        
+
 
     }
 }
