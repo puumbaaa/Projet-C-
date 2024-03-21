@@ -25,7 +25,6 @@ namespace test
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
@@ -37,7 +36,6 @@ namespace test
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            FileReader mapFile = new FileReader();
             FileReader combatGridFile = new FileReader();
             FileReader monster1File = new FileReader();
 
@@ -49,7 +47,6 @@ namespace test
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            mapFile.SetFile(sMap);
             combatGridFile.SetFile(sCombat);
             monster1File.SetFile(sMonster1);
 
@@ -61,7 +58,6 @@ namespace test
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            Map map = new Map();
             Grid grid = new Grid();
 
 
@@ -86,8 +82,6 @@ namespace test
             *///----------------------------------------------------------------------------------|
             combatGridFile.printFile();
 
-            Console.WriteLine(mapFile.sText.Length);
-            map.mapSet(mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 31);
@@ -144,7 +138,6 @@ namespace test
             int x = 60;
             int y = 15;
             Console.SetCursorPosition(x, y);
-            Console.WriteLine("P");
             Console.CursorVisible = false;
 
             while (true) // Game Loop
@@ -240,7 +233,7 @@ namespace test
                 combatGridFile.printFile();
 
                 // Draw Enemy
-                for (int i = 0; i < mapFile.GetLineCount(sMonster1); i++)
+                for (int i = 0; i < monster1File.GetLineCount(sMonster1); i++)
                 {
                     Console.SetCursorPosition(grid.combatGrid[grid.m_Case, 0], grid.combatGrid[grid.m_Case, 1] + i);
                     monster1File.PrintFileLine(sMonster1, i);
