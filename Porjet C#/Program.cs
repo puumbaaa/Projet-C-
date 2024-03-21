@@ -21,11 +21,28 @@ namespace test
 
             FileReader mapFile = new FileReader();
             mapFile.setFile(sMap);
-            mapFile.printFile();
+            //mapFile.printFile();
+
+            //test menu
+            
+            GameObject gameObject= new GameObject();
+            Component testCompo = new Component("test componenet");
+            Component testCompo1 = new Component("test componenet1");
+            Component testCompo2 = new Component("test componenet2");
+            Component testCompo3 = new Component("test componenet3");
+            gameObject.AddComponent(testCompo);
+            gameObject.AddComponent(testCompo1);
+            gameObject.AddComponent(testCompo2);
+            gameObject.AddComponent(testCompo3);
+            Menu menu = new Menu("Menu");
+            Console.Write(menu.DisplayMenu(mapFile,gameObject, 4));
+            //mapFile.printFile();
+            //fin test menu
+
             Map map = new Map();
             Console.WriteLine(mapFile.sText.Length);
             map.mapSet(mapFile.sText);
-
+            /*
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 30);
 
@@ -141,7 +158,7 @@ namespace test
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("P");
                 Console.CursorVisible = false;
-            }
+            }*/
         }
     }
 }
