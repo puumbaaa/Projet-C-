@@ -10,7 +10,7 @@ namespace Mapp
     class FileReader : Map
     {
 
-        string m_sText = "";
+        string m_sText;
 
         public string sText
         {
@@ -28,9 +28,8 @@ namespace Mapp
             }
         }
 
-        public void printFile(string file)
+        public void printFile()
         {
-            setFile(file);
             Console.WriteLine(sText);
         }
     }

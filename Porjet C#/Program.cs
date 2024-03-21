@@ -20,13 +20,14 @@ namespace test
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
             FileReader mapFile = new FileReader();
-            mapFile.printFile(sMap);
+            mapFile.setFile(sMap);
+            mapFile.printFile();
             Map map = new Map();
             Console.WriteLine(mapFile.sText.Length);
             map.mapSet(mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
-            Console.SetBufferSize(120, 30);
+            Console.SetBufferSize(120, 31);
 
             InputManager inputManager = new InputManager();
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
@@ -110,7 +111,7 @@ namespace test
                 }
                 if (inputManager.IsKey((ConsoleKey)39))
                 {
-                    if (x <= 118) 
+                    if (x < 119) 
                     {
                         if (map._mapTab[y, x + 1]._IsWalkable)
                         {
@@ -134,7 +135,7 @@ namespace test
                 }
 
                 Console.Clear();
-                mapFile.printFile(sMap);
+                mapFile.printFile();
 
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("P");

@@ -10,12 +10,12 @@ namespace Mapp
 {
     class Map
     {
-        GameObject[,] _map = new GameObject[30, 120];
+        GameObject[,] _map = new GameObject[30, 122];
         public GameObject[,] _mapTab {  get => _map; }
         public void  mapSet(string file) 
         {
             int j = 0;
-            for (int i = 0; i < 3600; i++)
+            for (int i = 0; i < 3650; i++)
             {
                 if (file[i] == 'H')
                 {
@@ -23,7 +23,7 @@ namespace Mapp
                     CaseState state = new CaseState("grass",true,false,true);
                     
                     grass.AddComponent(state);
-                    _map[i / 120,j] = grass;
+                    _map[i / 122,j] = grass;
                 }
                 else
                 {
@@ -31,9 +31,9 @@ namespace Mapp
                     CaseState state = new CaseState("case",true,false,false);
                     other.AddComponent(state);
                     other._IsWalkable = true;
-                    _map[i / 120, j] = other;
+                    _map[i / 122, j] = other;
                 }
-                if (j == 119) {
+                if (j == 121) {
                     j = (-1);
                 }
                 j++;
