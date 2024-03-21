@@ -16,7 +16,7 @@ namespace test
         static void Main(string[] args)
         {
 
-
+            
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
@@ -24,7 +24,7 @@ namespace test
             FileReader map = new FileReader();
             GridClass grid = new GridClass();
             map.PrintFile(sCombat);
-
+            
 
 
             Console.SetCursorPosition(0, 0);
@@ -86,37 +86,61 @@ namespace test
                 inputManager.Update(keyInfo);
                 if (x >= 1)
                 {
-                    if (inputManager.IsKey((ConsoleKey)37))
+                    if (inputManager.IsKey((ConsoleKey)37)) // Left
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
                         x -= 1;
+
+                        if (grid.SetGrid() - 1 >= 0)
+                        {
+                            grid.m_Case -= 1;
+                        }
+
                     }
                 }
 
                 if (y >= 1)
                 {
-                    if (inputManager.IsKey((ConsoleKey)38))
+                    if (inputManager.IsKey((ConsoleKey)38)) // Up
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
                         y -= 1;
+
+                        if (grid.m_Case - 3 >= 0)
+                        {
+                            grid.m_Case -= 3;
+                        }
+                        
                     }
                 }
 
                 if (x <= 118)
                 {
-                    if (inputManager.IsKey((ConsoleKey)39))
+                    if (inputManager.IsKey((ConsoleKey)39)) // Right
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
                         x += 1;
+
+                        if (grid.m_Case + 1 <= 17)
+                        {
+                            grid.m_Case += 1;
+                        }
+
                     }
                 }
 
                 if (y <= 28)
                 {
-                    if (inputManager.IsKey((ConsoleKey)40))
+                    if (inputManager.IsKey((ConsoleKey)40)) // Down
                     {
                         Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
                         y += 1;
+
+                        if (grid.m_Case + 3 <= 17)
+                        {
+                            grid.m_Case += 3;
+                        }
+
                     }
                 }
 
@@ -124,14 +148,14 @@ namespace test
                 map.PrintFile(sCombat);
 
 
-
+                grid.m_Case = 0;
                 for (int i = 0; i < map.GetLineCount(sMonster1); i++)
                 {
-                    Console.SetCursorPosition(grid.CombatGrid[3, 1], grid.CombatGrid[1, 0] + i);
+                    Console.SetCursorPosition(grid.gridSet[grid.m_Case, 0], grid.gridSet[grid.m_Case, 1] + i);
                     map.PrintFileLine(sMonster1, i);
                 }
 
-
+                
 
 
                 Console.CursorVisible = false;
