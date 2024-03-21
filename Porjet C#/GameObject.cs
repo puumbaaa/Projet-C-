@@ -9,8 +9,6 @@ namespace Porjet_C_
     internal class GameObject
     {
         List<Component> _componentsList;
-        bool _isWalkable = false;
-        public bool _IsWalkable { get => _isWalkable; set => _isWalkable = value; }
         public List<Component> ComponentsList { get => _componentsList; private set => _componentsList = new(10); }
 
         public GameObject()
@@ -20,10 +18,6 @@ namespace Porjet_C_
         public void AddComponent(Component component)
         {
             ComponentsList.Add(component);
-            //if (component.GetType() == typeof(CaseState)) { 
-            //    _isWalkable = true;
-            //}
-
         }
     }
 }

@@ -20,17 +20,22 @@ namespace Mapp
                 if (file[i] == 'H')
                 {
                     GameObject grass = new GameObject();
-                    CaseState state = new CaseState("grass",true,false,true);
-                    
+                    Component state = new CaseState("grass",true,false,true);
                     grass.AddComponent(state);
+                    Random rnd = new Random();
+                    if (rnd.Next(100) <= 5)
+                    {
+                        Component a = new Objects("pokeball" + i,false,true);
+                        grass.AddComponent(a);
+                    }
+                    
                     _map[i / 122,j] = grass;
                 }
                 else
                 {
                     GameObject other = new GameObject();
-                    CaseState state = new CaseState("case",true,false,false);
+                    Component state = new CaseState("case",true,false,false);
                     other.AddComponent(state);
-                    other._IsWalkable = true;
                     _map[i / 122, j] = other;
                 }
                 if (j == 121) {

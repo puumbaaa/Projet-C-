@@ -67,7 +67,7 @@ namespace test
             CaseState caseState = new CaseState("testCase", true, false, true);
             //Console.WriteLine(caseState.ComponentName);
 
-            Objects testObjectKey = new Objects("testKey");
+            //Objects testObjectKey = new Objects("testKey");
             //Console.WriteLine(testObjectKey.ComponentName);
             //Console.WriteLine(testObjectKey.IsKey);
             
@@ -88,12 +88,14 @@ namespace test
                 {
                     if (x >= 1) 
                     {
-                        if (map._mapTab[y, x - 1]._IsWalkable)
+                        if (map._mapTab[y, x - 1].ComponentsList[0] is CaseState)
                         {
-                        
-                            Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
-                            x -= 1;
-                        }
+                            if (((CaseState)map._mapTab[y, x - 1].ComponentsList[0]).IsWalkable)
+                            {
+                                Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                                x -= 1;
+                            }
+                         }
                     }
                     
                 }
@@ -101,12 +103,16 @@ namespace test
                 {
                     if (y >= 1) 
                     {
-                        if (map._mapTab[y - 1, x]._IsWalkable)
+                        if (map._mapTab[y - 1, x].ComponentsList[0] is CaseState)
                         {
-                        
-                            Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
-                            y -= 1;
+                            if (((CaseState)map._mapTab[y - 1, x].ComponentsList[0]).IsWalkable)
+                            {
+
+                                Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                                y -= 1;
+                            }
                         }
+                        
                     }
                     
                 }
@@ -114,11 +120,15 @@ namespace test
                 {
                     if (x < 119) 
                     {
-                        if (map._mapTab[y, x + 1]._IsWalkable)
+                        if (map._mapTab[y, x + 1].ComponentsList[0] is CaseState)
                         {
-                            Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
-                            x += 1;
+                            if (((CaseState)map._mapTab[y, x + 1].ComponentsList[0]).IsWalkable)
+                            {
+                                Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                                x += 1;
+                            }
                         }
+                        
                     }
                     
                 }
@@ -126,13 +136,29 @@ namespace test
                 {
                     if (y <= 28) 
                     {
-                        if (map._mapTab[y + 1, x]._IsWalkable)
+                        if (map._mapTab[y + 1, x].ComponentsList[0] is CaseState) 
                         {
-                        
-                            Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
-                            y += 1;
+                            if (((CaseState)map._mapTab[y + 1, x].ComponentsList[0]).IsWalkable)
+                            {
+
+                                Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                                y += 1;
+                            }
                         }
+                        
                     }
+                }
+                if (((CaseState)map._mapTab[y, x].ComponentsList[0]).StartFight())
+                {
+
+                }
+                else if (map._mapTab[y, x].ComponentsList.Count != 1)
+                {
+                    if (map._mapTab[y, x].ComponentsList[1] is Objects)
+                    {
+
+                    }
+
                 }
 
                 Console.Clear();
