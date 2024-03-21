@@ -10,7 +10,6 @@ namespace Gridd
     class Grid
     {
 
-        public int m_Case;
         int[,] _combatGrid; 
         int[] _gridSlots;
 
