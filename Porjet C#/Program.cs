@@ -20,7 +20,8 @@ namespace test
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
             FileReader mapFile = new FileReader();
-            mapFile.printFile(sMap);
+            mapFile.setFile(sMap);
+            mapFile.printFile();
             Map map = new Map();
             Console.WriteLine(mapFile.sText.Length);
             map.mapSet(mapFile.sText);
@@ -134,7 +135,7 @@ namespace test
                 }
 
                 Console.Clear();
-                mapFile.printFile(sMap);
+                mapFile.printFile();
 
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("P");

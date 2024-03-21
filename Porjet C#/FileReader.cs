@@ -28,9 +28,8 @@ namespace Mapp
             }
         }
 
-        public void printFile(string file)
+        public void printFile()
         {
-            setFile(file);
             Console.WriteLine(sText);
         }
     }
