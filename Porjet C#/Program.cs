@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Mapp;
+using Input;
+using System;
 
 using Porjet_C_;
 
@@ -8,18 +11,27 @@ namespace test
     class Program
     {
 
-        //static readonly string textFile = "C:\\Users\\wdamour\\source\\repos\\Projet-C-\\Map\\map.txt";
-
+    
 
         static void Main(string[] args)
         {
-            /*
-            if (File.Exists(textFile))
-            {
-                // Read entire text file content in one string
-                string text = File.ReadAllText(textFile);
-                Console.WriteLine(text);
-            }*/
+            string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
+            string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
+            string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
+
+            FileReader mapFile = new FileReader();
+            mapFile.setFile(sMap);
+            mapFile.printFile();
+            Map map = new Map();
+            Console.WriteLine(mapFile.sText.Length);
+            map.mapSet(mapFile.sText);
+
+            Console.SetCursorPosition(0, 0);
+            Console.SetBufferSize(120, 30);
+
+            InputManager inputManager = new InputManager();
+            List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
+            inputManager.Init(inputKeys);
             Types water = new Types("water");
             Types fire = new Types("fire");
             Types grass = new Types("grass");
@@ -39,62 +51,97 @@ namespace test
 
             Attack testAttaque = new Attack("Test", grass, 160.0f);
 
-            Console.WriteLine(testAttaque.ComponentName);
-            Console.WriteLine(testAttaque.AttackStat);
-            Console.WriteLine(testAttaque.OTypes.ComponentName);
+            //Console.WriteLine(testAttaque.ComponentName);
+            //Console.WriteLine(testAttaque.AttackStat);
+            //Console.WriteLine(testAttaque.OTypes.ComponentName);
 
-            Objects potion = new Objects("potion", "potion", 150.0f);
-            Objects def = new Objects("def", "def", 100.0f);
-            Bag bag = new Bag();
-            bag.AddObject(potion);
-            bag.AddObject(def);
-            bag.AddObject(def);
 
-            Pokemon testPokemon = new Pokemon("pikachu", 12, 10, 100, water, 150, 100, 20, 1500, 1500, false);
-            Pokemon testEnemyPokemon = new Pokemon("NotPikachu", 10, 10, 100, fire, 200000000000, 100, 20, 1500, 1500, false);;
-            Console.WriteLine($"Key : {bag.NbKey}");
-            Console.WriteLine($"Pokeball : {bag.NbPokeball}");
-            Console.WriteLine($"Potion : {bag.NbPotion}");
-            Console.WriteLine($"Attck : {bag.AttackBoost}");
-            Console.WriteLine($"Def : {bag.DefBoost}");
-            Console.WriteLine($"Speed : {bag.SpeedBoost}");
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            Console.WriteLine($"Name : {testEnemyPokemon.Name}, Level : {testEnemyPokemon.Level} , Current exp : {testEnemyPokemon.CurrentExp}, total exp : {testEnemyPokemon.TotalExp}, current health : {testEnemyPokemon.CurrentHealth}, total health : {testEnemyPokemon.TotalHealth}");
-            testPokemon.TakeDamage(testEnemyPokemon, testAttaque);
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            testPokemon.UseObject(potion, bag);
-            Console.WriteLine($"Key : {bag.NbKey}");
-            Console.WriteLine($"Pokeball : {bag.NbPokeball}");
-            Console.WriteLine($"Potion : {bag.NbPotion}");
-            Console.WriteLine($"Attck : {bag.AttackBoost}");
-            Console.WriteLine($"Def : {bag.DefBoost}");
-            Console.WriteLine($"Speed : {bag.SpeedBoost}");
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            testPokemon.GetExp(testEnemyPokemon);
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Current exp : {testPokemon.CurrentExp}, total exp : {testPokemon.TotalExp}, current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            testPokemon.UseObject(def, bag);
-            Console.WriteLine($"Key : {bag.NbKey}");
-            Console.WriteLine($"Pokeball : {bag.NbPokeball}");
-            Console.WriteLine($"Potion : {bag.NbPotion}");
-            Console.WriteLine($"Attck : {bag.AttackBoost}");
-            Console.WriteLine($"Def : {bag.DefBoost}");
-            Console.WriteLine($"Speed : {bag.SpeedBoost}");
-            testPokemon.UseObject(def, bag);;
-            Console.WriteLine($"Key : {bag.NbKey}");
-            Console.WriteLine($"Pokeball : {bag.NbPokeball}");
-            Console.WriteLine($"Potion : {bag.NbPotion}");
-            Console.WriteLine($"Attck : {bag.AttackBoost}");
-            Console.WriteLine($"Def : {bag.DefBoost}");
-            Console.WriteLine($"Speed : {bag.SpeedBoost}");
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            testPokemon.StatBeginingFight();
-            Console.WriteLine($"Name : {testPokemon.Name}, Level : { testPokemon.Level} , Def : {testPokemon.DefStatInFight} current health : {testPokemon.CurrentHealth}, total health : { testPokemon.TotalHealth}");
-            for (int i = 0; i < testPokemon.ListUsedObjects.Count; i++)
-            {
-                Console.WriteLine(testPokemon.ListUsedObjects[i].ComponentName);
+            GameObject testGameObject = new GameObject();
+
+            testGameObject.AddComponent(testAttaque);
+            testGameObject.AddComponent(water);
+
+            //Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
+            //Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
+
+            CaseState caseState = new CaseState("testCase", true, false, true);
+            //Console.WriteLine(caseState.ComponentName);
+
+            Objects testObjectKey = new Objects("testKey");
+            //Console.WriteLine(testObjectKey.ComponentName);
+            //Console.WriteLine(testObjectKey.IsKey);
+            
+            Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
+            //Console.WriteLine(testObjectBoost.ComponentName);
+            //Console.WriteLine(testObjectBoost.IsKey);
+            //Console.WriteLine(testObjectBoost.StatName);
+            //Console.WriteLine(testObjectBoost.StatValue);
+            int x = 60;
+            int y = 15;
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine("P");
+            Console.CursorVisible = false;
+            while (true) {
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                inputManager.Update(keyInfo);
+                if (inputManager.IsKey((ConsoleKey)37))
+                {
+                    if (x >= 1) 
+                    {
+                        if (map._mapTab[y, x - 1]._IsWalkable)
+                        {
+                        
+                            Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                            x -= 1;
+                        }
+                    }
+                    
+                }
+                if (inputManager.IsKey((ConsoleKey)38))
+                {
+                    if (y >= 1) 
+                    {
+                        if (map._mapTab[y - 1, x]._IsWalkable)
+                        {
+                        
+                            Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                            y -= 1;
+                        }
+                    }
+                    
+                }
+                if (inputManager.IsKey((ConsoleKey)39))
+                {
+                    if (x <= 118) 
+                    {
+                        if (map._mapTab[y, x + 1]._IsWalkable)
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                            x += 1;
+                        }
+                    }
+                    
+                }
+                if (inputManager.IsKey((ConsoleKey)40))
+                {
+                    if (y <= 28) 
+                    {
+                        if (map._mapTab[y + 1, x]._IsWalkable)
+                        {
+                        
+                            Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                            y += 1;
+                        }
+                    }
+                }
+
+                Console.Clear();
+                mapFile.printFile();
+
+                Console.SetCursorPosition(x, y);
+                Console.WriteLine("P");
+                Console.CursorVisible = false;
             }
-            while (true) { }
         }
     }
 }
