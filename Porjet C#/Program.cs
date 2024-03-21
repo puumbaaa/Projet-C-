@@ -21,14 +21,16 @@ namespace test
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
-            FileReader map = new FileReader();
-            GridClass grid = new GridClass();
-            map.PrintFile(sCombat);
-            
-
+            FileReader mapFile = new FileReader();
+            mapFile.setFile(sMap);
+            mapFile.printFile();
+            Map map = new Map();
+            Console.WriteLine(mapFile.sText.Length);
+            map.mapSet(mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
-            Console.SetBufferSize(120, 30);
+            Console.SetBufferSize(120, 31);
+
             InputManager inputManager = new InputManager();
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
             inputManager.Init(inputKeys);
@@ -49,11 +51,12 @@ namespace test
             normal.AddWeakness(fire);
             normal.AddWeakness(grass);
 
-            Attack testAttaque = new Attack("Test", water, 160.0f);
+            Attack testAttaque = new Attack("Test", grass, 160.0f);
 
             //Console.WriteLine(testAttaque.ComponentName);
             //Console.WriteLine(testAttaque.AttackStat);
             //Console.WriteLine(testAttaque.OTypes.ComponentName);
+
 
             GameObject testGameObject = new GameObject();
 
@@ -84,63 +87,54 @@ namespace test
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
-                if (x >= 1)
+                if (inputManager.IsKey((ConsoleKey)37))
                 {
-                    if (inputManager.IsKey((ConsoleKey)37)) // Left
+                    if (x >= 1) 
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
-                        x -= 1;
-
-                        if (grid.SetGrid() - 1 >= 0)
+                        if (map._mapTab[y, x - 1]._IsWalkable)
                         {
-                            grid.m_Case -= 1;
-                        }
-
-                    }
-                }
-
-                if (y >= 1)
-                {
-                    if (inputManager.IsKey((ConsoleKey)38)) // Up
-                    {
-                        Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
-                        y -= 1;
-
-                        if (grid.m_Case - 3 >= 0)
-                        {
-                            grid.m_Case -= 3;
-                        }
                         
-                    }
-                }
-
-                if (x <= 118)
-                {
-                    if (inputManager.IsKey((ConsoleKey)39)) // Right
-                    {
-                        Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
-                        x += 1;
-
-                        if (grid.m_Case + 1 <= 17)
-                        {
-                            grid.m_Case += 1;
+                            Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
+                            x -= 1;
                         }
-
                     }
+                    
                 }
-
-                if (y <= 28)
+                if (inputManager.IsKey((ConsoleKey)38))
                 {
-                    if (inputManager.IsKey((ConsoleKey)40)) // Down
+                    if (y >= 1) 
                     {
-                        Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
-                        y += 1;
-
-                        if (grid.m_Case + 3 <= 17)
+                        if (map._mapTab[y - 1, x]._IsWalkable)
                         {
-                            grid.m_Case += 3;
+                        
+                            Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
+                            y -= 1;
                         }
-
+                    }
+                    
+                }
+                if (inputManager.IsKey((ConsoleKey)39))
+                {
+                    if (x < 119) 
+                    {
+                        if (map._mapTab[y, x + 1]._IsWalkable)
+                        {
+                            Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
+                            x += 1;
+                        }
+                    }
+                    
+                }
+                if (inputManager.IsKey((ConsoleKey)40))
+                {
+                    if (y <= 28) 
+                    {
+                        if (map._mapTab[y + 1, x]._IsWalkable)
+                        {
+                        
+                            Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
+                            y += 1;
+                        }
                     }
                 }
 
@@ -157,6 +151,7 @@ namespace test
 
                 
 
+                mapFile.printFile();
 
                 Console.CursorVisible = false;
             }
