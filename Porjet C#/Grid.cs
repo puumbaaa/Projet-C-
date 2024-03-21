@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Grid
+namespace Gridd
 {
-    class GridClass
+    class Grid
     {
 
-        int m_Case;
-        int[,] combatGrid;
-        int[] gridSlots;
+        public int m_Case;
+        int[,] _combatGrid; 
+        int[] _gridSlots;
 
-        int m_Case;
-        int[,] combatGrid;
-        int[] gridSlots;
-
+        public int[,] combatGrid { get => _combatGrid; private set => _combatGrid = value; }
+        public int[] gridSlots { get => _gridSlots; set => _gridSlots = value; }
 
         /*//----------------------------------------------------------------------------------|
         |                                                                                     |
@@ -31,7 +30,7 @@ namespace Grid
         {
             
 
-            combatGrid = new int[,] {
+            _combatGrid = new int[,] {
 
                 // Ally
                 {3, 2}, // Case 0
@@ -63,36 +62,12 @@ namespace Grid
         }
         void SetCombatSlots()
         {
-            gridSlots = new int[17];
-            for (int i = 0; i <= 17; i++)
+            _gridSlots = new int[17];
+            for (int i = 0; i < 17; i++)
             {
-                gridSlots[i] = 0;
+                _gridSlots[i] = 0;
             }
         }
-
-
-        /*//----------------------------------------------------------------------------------|
-        |                                                                                     |
-        |                                                                                     |
-        |                                    Get Grids                                        |
-        |                                                                                     |
-        |                                                                                     |
-        *///----------------------------------------------------------------------------------|
-        public int[,] GetCombatGrid()
-        {
-            return combatGrid;
-        }
-
-        public int[] GetSlotGrid()
-        {
-            return gridSlots;
-        }
-
-        public int GetSlot(int i)
-        {
-            return gridSlots[i];
-        }
-
 
 
         /*//----------------------------------------------------------------------------------|

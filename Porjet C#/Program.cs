@@ -4,7 +4,7 @@ using game;
 using Mapp;
 using Input;
 using System;
-using Grid;
+using Gridd;
 using Porjet_C_;
 
 namespace test
@@ -16,14 +16,81 @@ namespace test
 
         static void Main(string[] args)
         {
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Set Files Path                                     |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
-            FileReader map = new FileReader();
-            GridClass grid = new GridClass();
-            map.PrintFile(sCombat);
-            
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Create FileReaders                                 |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            FileReader mapFile = new FileReader();
+            FileReader combatGridFile = new FileReader();
+            FileReader monster1File = new FileReader();
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Set Files for FileReaders                          |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            mapFile.SetFile(sMap);
+            combatGridFile.SetFile(sCombat);
+            monster1File.SetFile(sMonster1);
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Set Instances                                      |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            Map map = new Map();
+            Grid grid = new Grid();
+
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Set Grids                                          |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            grid.GenerateGrids();
+            grid.gridSlots[1] = 1;
+            grid.m_Case = 0;
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Draw                                               |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+            combatGridFile.printFile();
+
+            Console.WriteLine(mapFile.sText.Length);
+            map.mapSet(mapFile.sText);
+
+            Console.SetCursorPosition(0, 0);
+            Console.SetBufferSize(120, 31);
 
 
             Console.SetCursorPosition(0, 0);
@@ -65,7 +132,7 @@ namespace test
             CaseState caseState = new CaseState("testCase", true, false, true);
             //Console.WriteLine(caseState.ComponentName);
 
-            Objects testObjectKey = new Objects("testKey");
+            //Objects testObjectKey = new Objects("testKey");
             //Console.WriteLine(testObjectKey.ComponentName);
             //Console.WriteLine(testObjectKey.IsKey);
 
@@ -79,8 +146,18 @@ namespace test
             Console.SetCursorPosition(x, y);
             Console.WriteLine("P");
             Console.CursorVisible = false;
-            while (true)
+
+            while (true) // Game Loop
             {
+
+                /*//----------------------------------------------------------------------------------|
+                |                                                                                     |
+                |                                                                                     |
+                |                                  Moving                                             |
+                |                                                                                     |
+                |                                                                                     |
+                *///----------------------------------------------------------------------------------|
+
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
                 if (x >= 1)
@@ -90,7 +167,7 @@ namespace test
                         Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
                         x -= 1;
 
-                        if (grid.SetGrid() - 1 >= 0)
+                        if (grid.m_Case - 1 >= 0)
                         {
                             grid.m_Case -= 1;
                         }
@@ -109,7 +186,7 @@ namespace test
                         {
                             grid.m_Case -= 3;
                         }
-                        
+
                     }
                 }
 
@@ -143,22 +220,39 @@ namespace test
                     }
                 }
 
+
+
+
+
+
+
+
+                /*//----------------------------------------------------------------------------------|
+                |                                                                                     |
+                |                                                                                     |
+                |                                  Clear and redraw                                   |
+                |                                                                                     |
+                |                                                                                     |
+                *///----------------------------------------------------------------------------------|
                 Console.Clear();
-                map.PrintFile(sCombat);
 
+                // Draw Grid
+                combatGridFile.printFile();
 
-                grid.m_Case = 0;
-                for (int i = 0; i < map.GetLineCount(sMonster1); i++)
+                // Draw Enemy
+                for (int i = 0; i < mapFile.GetLineCount(sMonster1); i++)
                 {
-                    Console.SetCursorPosition(grid.gridSet[grid.m_Case, 0], grid.gridSet[grid.m_Case, 1] + i);
-                    map.PrintFileLine(sMonster1, i);
+                    Console.SetCursorPosition(grid.combatGrid[grid.m_Case, 0], grid.combatGrid[grid.m_Case, 1] + i);
+                    monster1File.PrintFileLine(sMonster1, i);
                 }
 
                 
 
 
-                Console.CursorVisible = false;
-            }
+            } // End of Game Loop
+
+
+
         }
     }
 }
