@@ -49,11 +49,12 @@ namespace test
             normal.AddWeakness(fire);
             normal.AddWeakness(grass);
 
-            Attack testAttaque = new Attack("Test", water, 160.0f);
+            Attack testAttaque = new Attack("Test", grass, 160.0f);
 
             //Console.WriteLine(testAttaque.ComponentName);
             //Console.WriteLine(testAttaque.AttackStat);
             //Console.WriteLine(testAttaque.OTypes.ComponentName);
+
 
             GameObject testGameObject = new GameObject();
 
