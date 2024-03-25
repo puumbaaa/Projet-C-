@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Objects : Component
+    internal class Objects 
     {
         string _statName;
         float _statValue;
@@ -19,7 +19,7 @@ namespace Porjet_C_
         public bool IsKey { get => _isKey; set => _isKey = value; }
         public bool IsPokeball { get => _isPokeball; set => _isPokeball = value; }
 
-        public Objects(string name, string statName, float statValue) : base(name) 
+        public Objects(string statName, float statValue)
         {
             StatName = statName;
             StatValue = statValue;
@@ -27,7 +27,7 @@ namespace Porjet_C_
             IsPokeball = false;
         } 
 
-        public Objects(string name, bool isKey, bool isPokeball) : base(name) 
+        public Objects(bool isKey, bool isPokeball)
         {
             IsKey = isKey;
             IsPokeball = isPokeball;

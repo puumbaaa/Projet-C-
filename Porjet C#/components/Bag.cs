@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Bag
+    internal class Bag : Component
     {
         List<Objects> _objectsList;
         int _nbKey;
@@ -24,7 +24,7 @@ namespace Porjet_C_
         public int DefBoost { get => _defBoost; private set => _defBoost = value; }
         public int SpeedBoost { get => _speedBoost; private set => _speedBoost = value; }
 
-        public Bag()
+        public Bag(string nameComponent) : base(nameComponent)
         {
             ObjectsList = new List<Objects>();
             NbKey = 0;

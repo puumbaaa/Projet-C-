@@ -9,168 +9,142 @@ using Input;
 using System;
 
 using Porjet_C_;
+using System.Security.Cryptography;
+using System.IO.Compression;
+using System.Numerics;
 
 namespace game
 {
     class Game
     {
+        FileReader _mapFile = new FileReader();
+        Map _map = new Map();
+        GameObject _player;
+        InputManager _inputManager = new InputManager();
 
-        static public void gameScript(GameObject player)
+        public Game(GameObject player)
         {
+            _player = player;  
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
-            FileReader mapFile = new FileReader();
-            mapFile.setFile(sMap);
-            mapFile.printFile();
-            Map map = new Map();
-            Console.WriteLine(mapFile.sText.Length);
-            map.mapSet(mapFile.sText);
+            _mapFile.setFile(sMap);
+            _mapFile.printFile();
+            
+            _map.mapSet(_mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 31);
 
-            InputManager inputManager = new InputManager();
+            
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
-            inputManager.Init(inputKeys);
-            Types water = new Types("water");
-            Types fire = new Types("fire");
-            Types grass = new Types("grass");
-            Types normal = new Types("normal");
+            _inputManager.Init(inputKeys);
+        }
+        public void update(int x, int y)
+        {
+            Console.Clear();
+            _mapFile.printFile();
 
-            water.AddWeakness(grass);
-            grass.AddWeakness(fire);
-            fire.AddWeakness(water);
-
-            water.AddStrength(fire);
-            grass.AddStrength(water);
-            fire.AddStrength(grass);
-
-            normal.AddWeakness(water);
-            normal.AddWeakness(fire);
-            normal.AddWeakness(grass);
-
-            Attack testAttaque = new Attack("Test", grass, 160.0f);
-
-            //Console.WriteLine(testAttaque.ComponentName);
-            //Console.WriteLine(testAttaque.AttackStat);
-            //Console.WriteLine(testAttaque.OTypes.ComponentName);
-
-
-            GameObject testGameObject = new GameObject();
-
-            testGameObject.AddComponent(testAttaque);
-            testGameObject.AddComponent(water);
-
-            //Console.WriteLine(testGameObject.ComponentsList[0].ComponentName);
-            //Console.WriteLine(testGameObject.ComponentsList[1].ComponentName);
-
-            CaseState caseState = new CaseState("testCase", true, false, true);
-            //Console.WriteLine(caseState.ComponentName);
-
-            //Objects testObjectKey = new Objects("testKey");
-            //Console.WriteLine(testObjectKey.ComponentName);
-            //Console.WriteLine(testObjectKey.IsKey);
-
-            Objects testObjectBoost = new Objects("testObject", "Attaque", 160.0f);
-            //Console.WriteLine(testObjectBoost.ComponentName);
-            //Console.WriteLine(testObjectBoost.IsKey);
-            //Console.WriteLine(testObjectBoost.StatName);
-            //Console.WriteLine(testObjectBoost.StatValue);
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
+            Console.CursorVisible = false;
+        }
+        public void gameScript()
+        {
             int x = 60;
             int y = 15;
             Console.SetCursorPosition(x, y);
-            Console.WriteLine("P");
+            Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
             while (true)
             {
+
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
-                inputManager.Update(keyInfo);
-                if (inputManager.IsKey((ConsoleKey)37))
+                _inputManager.Update(keyInfo);
+                if (_inputManager.IsKey((ConsoleKey)37))
                 {
                     if (x >= 1)
                     {
-                        if (map._mapTab[y, x - 1].ComponentsList[0] is CaseState)
+                        if (_map._mapTab[y, x - 1].ComponentsList[0] is CaseState)
                         {
-                            if (((CaseState)map._mapTab[y, x - 1].ComponentsList[0]).IsWalkable)
+                            if (((CaseState)_map._mapTab[y, x - 1].ComponentsList[0]).IsWalkable)
                             {
                                 Console.MoveBufferArea(x, y, 1, 1, x - 1, y);
                                 x -= 1;
+                                update(x, y);  
                             }
                         }
                     }
 
                 }
-                if (inputManager.IsKey((ConsoleKey)38))
+                if (_inputManager.IsKey((ConsoleKey)38))
                 {
                     if (y >= 1)
                     {
-                        if (map._mapTab[y - 1, x].ComponentsList[0] is CaseState)
+                        if (_map._mapTab[y - 1, x].ComponentsList[0] is CaseState)
                         {
-                            if (((CaseState)map._mapTab[y - 1, x].ComponentsList[0]).IsWalkable)
+                            if (((CaseState)_map._mapTab[y - 1, x].ComponentsList[0]).IsWalkable)
                             {
 
                                 Console.MoveBufferArea(x, y, 1, 1, x, y - 1);
                                 y -= 1;
+                                update(x, y);
                             }
                         }
 
                     }
 
                 }
-                if (inputManager.IsKey((ConsoleKey)39))
+                if (_inputManager.IsKey((ConsoleKey)39))
                 {
                     if (x < 119)
                     {
-                        if (map._mapTab[y, x + 1].ComponentsList[0] is CaseState)
+                        if (_map._mapTab[y, x + 1].ComponentsList[0] is CaseState)
                         {
-                            if (((CaseState)map._mapTab[y, x + 1].ComponentsList[0]).IsWalkable)
+                            if (((CaseState)_map._mapTab[y, x + 1].ComponentsList[0]).IsWalkable)
                             {
                                 Console.MoveBufferArea(x, y, 1, 1, x + 1, y);
                                 x += 1;
+                                update(x, y);
                             }
                         }
 
                     }
 
                 }
-                if (inputManager.IsKey((ConsoleKey)40))
+                if (_inputManager.IsKey((ConsoleKey)40))
                 {
                     if (y <= 28)
                     {
-                        if (map._mapTab[y + 1, x].ComponentsList[0] is CaseState)
+                        if (_map._mapTab[y + 1, x].ComponentsList[0] is CaseState)
                         {
-                            if (((CaseState)map._mapTab[y + 1, x].ComponentsList[0]).IsWalkable)
+                            if (((CaseState)_map._mapTab[y + 1, x].ComponentsList[0]).IsWalkable)
                             {
 
                                 Console.MoveBufferArea(x, y, 1, 1, x, y + 1);
                                 y += 1;
+                                update(x, y);
                             }
                         }
 
                     }
                 }
-                if (((CaseState)map._mapTab[y, x].ComponentsList[0]).StartFight())
+                
+                if (((CaseState)_map._mapTab[y, x].ComponentsList[0]).StartFight())
                 {
-                    return;
+                    //return;
                 }
-                else if (map._mapTab[y, x].ComponentsList.Count != 1)
+                else if (_map._mapTab[y, x].ComponentsList.Count != 1)
                 {
-                    if (map._mapTab[y, x].ComponentsList[1] is Objects)
+                    if (((Bag)_map._mapTab[y, x].ComponentsList[1]).ObjectsList.FirstOrDefault() != null)
                     {
-                        Objects pokeball = new Objects("pokeball",false,true);
-                        return;
+                        ((Bag)_player.ComponentsList[1]).ObjectsList.Add(((Bag)_map._mapTab[y, x].ComponentsList[1]).ObjectsList[0]);
+                        ((Bag)_map._mapTab[y, x].ComponentsList[1]).RemoveObject(((Bag)_map._mapTab[y, x].ComponentsList[1]).ObjectsList[0]);
+                        Console.WriteLine("Vous avez ramassé une pokeball !");
                     }
 
                 }
-
-                Console.Clear();
-                mapFile.printFile();
-
-                Console.SetCursorPosition(x, y);
-                Console.WriteLine("P");
-                Console.CursorVisible = false;
             }
         }
     }    

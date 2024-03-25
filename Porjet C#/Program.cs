@@ -12,9 +12,14 @@ namespace test
 
         static void Main(string[] args)
         {
+            
             GameObject player = new GameObject();
-            Bag bag = new Bag();
-            Game.gameScript(player);
+            Component playerRender = new Render("render","P");
+            Component bag = new Bag("bag");
+            player.AddComponent(playerRender);
+            player.AddComponent(bag);
+            Game game = new Game(player);
+            game.gameScript();
 
         }
     }

@@ -21,12 +21,14 @@ namespace Mapp
                 {
                     GameObject grass = new GameObject();
                     Component state = new CaseState("grass",true,false,true);
+                    Component bag = new Bag("bag");
                     grass.AddComponent(state);
+                    grass.AddComponent(bag);
                     Random rnd = new Random();
                     if (rnd.Next(100) <= 5)
                     {
-                        Component a = new Objects("pokeball" + i,false,true);
-                        grass.AddComponent(a);
+                        Objects a = new Objects(false,true);
+                        ((Bag)grass.ComponentsList[1]).ObjectsList.Add(a);
                     }
                     
                     _map[i / 122,j] = grass;
