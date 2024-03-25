@@ -16,7 +16,7 @@ namespace Porjet_C_
 
         public Types(string componentName) : base(componentName)
         {
-            WeaknessType = new List<Types>(); 
+            WeaknessType = new List<Types>();
             StrengthType = new List<Types>();
         }
         public void AddWeakness(Types types)

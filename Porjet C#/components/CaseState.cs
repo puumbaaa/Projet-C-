@@ -16,7 +16,7 @@ namespace Porjet_C_
         public bool IsBorder { get => _isBorder; set => _isBorder = value; }
         public bool IsGrass { get => _isGrass; set => _isGrass = value; }
 
-        public CaseState(string name, bool walkable, bool border, bool grass) : base(name) 
+        public CaseState(string name, bool walkable, bool border, bool grass) : base(name)
         {
             IsWalkable = walkable;
             IsBorder = border;
