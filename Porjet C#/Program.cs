@@ -34,6 +34,22 @@ namespace test
             gameObject.AddComponent(testCompo1);
             gameObject.AddComponent(testCompo2);
             gameObject.AddComponent(testCompo3);
+            Types type = new Types("fire");
+            Attack attack1 = new Attack("azertyuiop", type, 1000);
+            Pokemon pokemon1 = new Pokemon("testPokemon", 1000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
+            pokemon1.setAttck(attack1);
+            pokemon1.setAttck(attack1);
+            pokemon1.setAttck(attack1);
+            pokemon1.setAttck(attack1);
+            GameObject pokemonGameObject = new GameObject();
+            pokemonGameObject.AddComponent(pokemon1);
+            pokemonGameObject.AddComponent(pokemon1);
+            pokemonGameObject.AddComponent(pokemon1);
+            pokemonGameObject.AddComponent(pokemon1);
+            MenuPokemon menuPokemonTest = new MenuPokemon("Pokemons", pokemonGameObject);
+            string newMap = menuPokemonTest.DisplayPokemonMenue(mapFile, 0);
+            Console.WriteLine(newMap);
+            /*
             Menu menu = new Menu("Menu");
             Console.Write(menu.DisplayMenu(mapFile,gameObject, 4));
             //mapFile.printFile();
@@ -41,7 +57,7 @@ namespace test
 
             Map map = new Map();
             Console.WriteLine(mapFile.sText.Length);
-            map.mapSet(mapFile.sText);
+            map.mapSet(mapFile.sText);*/
             /*
             Console.SetCursorPosition(0, 0);
             Console.SetBufferSize(120, 30);
