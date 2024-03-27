@@ -25,7 +25,7 @@ namespace Mapp
                     grass.AddComponent(state);
                     grass.AddComponent(bag);
                     Random rnd = new Random();
-                    if (rnd.Next(100) <= 5)
+                    if (rnd.Next(100) <= 1)
                     {
                         Objects a = new Objects(false,true);
                         ((Bag)grass.ComponentsList[1]).ObjectsList.Add(a);
