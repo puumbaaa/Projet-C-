@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gridd
 {
-    class Grid
+    public class Grid
     {
 
         int[,] _combatGrid; 
