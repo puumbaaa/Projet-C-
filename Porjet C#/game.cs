@@ -49,15 +49,21 @@ namespace game
         public void update()
         {
             Console.Clear();
+            Console.WriteLine("\x1b[3J");
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition(0, 0);
             _mapFile.printFile();
 
             Console.SetCursorPosition(_playerX, _playerY);
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
         }
         public int gameScript()
         {
-            
+            update();
+
             while (true)
             {
 
@@ -133,11 +139,15 @@ namespace game
                 }
                 if (_inputManager.IsKey((ConsoleKey)27))
                 {
+                    Console.Clear();
+                    Console.WriteLine("\x1b[3J");
                     return 1;
                 }
 
                 if (((CaseState)_map._mapTab[_playerY, _playerX].ComponentsList[0]).StartFight())
                 {
+                    Console.Clear();
+                    Console.WriteLine("\x1b[3J");
                     return 2;
                 }
                 else if (_map._mapTab[_playerY, _playerX].ComponentsList.Count != 1)

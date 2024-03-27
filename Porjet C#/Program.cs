@@ -14,16 +14,8 @@ namespace test
 
         static void Main(string[] args)
         {
-            string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
-            FileReader _mapFile = new FileReader();
-            Map _map = new Map();
-            _mapFile.setFile(sMap);
-            _mapFile.printFile();
-
-            _map.mapSet(_mapFile.sText);
-
             Console.SetCursorPosition(0, 0);
-            Console.SetBufferSize(120, 31);
+            Console.SetBufferSize(120, 32);
 
             GameObject player = new GameObject();
             Component playerRender = new Render("render","P");
@@ -44,9 +36,10 @@ namespace test
             Attack attack1 = new Attack("azertyuiop", type, 1000);
             Pokemon pokemon1 = new Pokemon("testPokemon", 1000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
             pokemon1.setAttck(attack1);
+            ((Bag)bag).PokemonList.Add(pokemon1);
             GameObject pokemonGameObject = new GameObject();
             pokemonGameObject.AddComponent(pokemon1);
-            Menu menuPokemonTest = new Menu("Pokemons", pokemonGameObject);
+            Menu menuPokemonTest = new Menu("Pokemons", player);
 
             StateMachineGame stateMachineGame = new StateMachineGame();
             Game game = new Game(player);
@@ -54,15 +47,21 @@ namespace test
             while (true) {
                 switch (stateMachineGame)
                 {
-                    case 0:
+                    case (StateMachineGame)0:
                         stateMachineGame = (StateMachineGame)game.gameScript();
                         lastState = 0;
+                        Console.Clear();
+                        Console.WriteLine("\x1b[3J");
                         break;
                     case (StateMachineGame)1:
-                        stateMachineGame = (StateMachineGame)menuPokemonTest.MenuScript(_mapFile,1, lastState);
+                        stateMachineGame = (StateMachineGame)menuPokemonTest.MenuScript(1, lastState);
+                        Console.Clear();
+                        Console.WriteLine("\x1b[3J");
                         break;
                     case (StateMachineGame)2:
                         stateMachineGame = 0;
+                        Console.Clear();
+                        Console.WriteLine("\x1b[3J");
                         lastState = 2;
                         break;
 

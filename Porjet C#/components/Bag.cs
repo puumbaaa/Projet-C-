@@ -29,6 +29,7 @@ namespace Porjet_C_
         public Bag(string nameComponent) : base(nameComponent)
         {
             ObjectsList = new List<Objects>();
+            PokemonList = new List<Pokemon>();
             NbKey = 0;
             NbPokeball = 0;
             NbPotion = 0;
