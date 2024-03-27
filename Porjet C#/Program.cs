@@ -99,10 +99,10 @@ namespace test
             for (int i = 0; i < 2; i++)
             {
                 m_Case = i + 13;
-                for (int j = 0; j < monster1File.GetLineCount(sMonster1); j++)
+                for (int j = 0; j < monster1File.GetTextLineCount(); j++)
                 {
                     Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                    monster1File.PrintFileLine(sMonster1, j);
+                    monster1File.PrintTextLine(j);
                 }
             }
 
@@ -240,10 +240,10 @@ namespace test
                     for (int i = 0; i < attack.AttackChose.Count() ; i++)
                     {
                         m_Case = attack.AttackChose[i];
-                        for (int j = 0; j < caseFullFile.GetLineCount(sCaseFull); j++)
+                        for (int j = 0; j < caseFullFile.GetTextLineCount(); j++)
                         {
                             Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                            caseFullFile.PrintFileLine(sCaseFull, j);
+                            caseFullFile.PrintTextLine(j);
                         }
                     }
 
@@ -255,10 +255,10 @@ namespace test
                 {
                     m_Case = i+13;
                     grid.gridSlots[m_Case] = 1;
-                    for (int j = 0; j < monster1File.GetLineCount(sMonster1); j++)
+                    for (int j = 0; j < monster1File.GetTextLineCount(); j++)
                     {
                         Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                        monster1File.PrintFileLine(sMonster1, j);
+                        monster1File.PrintTextLine(j);
                     }
                 }
 

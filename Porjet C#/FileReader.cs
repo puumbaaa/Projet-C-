@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mapp
 {
@@ -18,7 +19,8 @@ namespace Mapp
             private set => m_sText = value;
         }
 
-        public int GetLineCount(string file)
+
+        public int GetFileLineCount(string file)
         {
             if (File.Exists(file))
             {
@@ -29,7 +31,10 @@ namespace Mapp
                 return 0;
             }
         }
-
+        public int GetTextLineCount()
+        {
+            return m_sText.Split('\n').Length +1;
+        }
 
         public void SetFile(string file)
         {
@@ -47,8 +52,28 @@ namespace Mapp
 
         public void PrintFileLine(string file, int line)
         {
-            string m_sText = File.ReadLines(file).Skip(line).Take(1).First();
-            Console.WriteLine(m_sText);
+            Console.WriteLine(
+                File.ReadLines(file).Skip(line).Take(1).First()
+                );
+            
+        }
+
+        public void PrintTextLine(int lineNumber)
+        {
+            var reader = new StringReader(m_sText);
+
+            string line;
+            int currentLineNumber = 0;
+
+            do
+            {
+                currentLineNumber += 1;
+                line = reader.ReadLine();
+            }
+            while (line != null && currentLineNumber < lineNumber);
+
+            Console.WriteLine( (currentLineNumber == lineNumber) ? line :
+                                                       string.Empty );
 
         }
 

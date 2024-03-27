@@ -79,6 +79,12 @@ namespace Porjet_C_
             *///----------------------------------------------------------------------------------|
 
 
+            GameObject astraleon = new GameObject();
+            Component astraleonStat = new Pokemon("astraleonStat", 1, 0, 100, mysticType, 3, 1, 2, 15, 15, false);
+            Component astraleonRender = new Render("astraleonRender","f");
+            astraleon.AddComponent(astraleonStat);
+            
+
             /*
             List<Types> types = new List<Types>();
             types.Add(electricType);    
