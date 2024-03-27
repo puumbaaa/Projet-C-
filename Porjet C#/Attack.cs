@@ -19,5 +19,7 @@ namespace Porjet_C_
             OTypes = types;
             AttackStat = attack;
         }
+
+        
     }
 }
