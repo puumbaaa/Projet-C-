@@ -42,9 +42,33 @@ namespace test
             Game game = new Game(player);
 
             Save save = new Save();
-            save.SaveTheGame("testPlayer", game, bag2, pokemonList);
+            save.SaveTheGame("testPlayer1212311", game, bag2, pokemonList);
+            Console.Clear();
+            Console.WriteLine($"Pos : {game.PosX} , {game.PosY}");
+            Console.WriteLine($"Key : {bag2.NbKey} ,  Pokeball : {bag2.NbPokeball}, potion : {bag2.NbPotion}, nbAttack : {bag2.AttackBoost}, nbDef : {bag2.DefBoost}, nbSpeed ; {bag2.SpeedBoost}");
+            foreach (var item in pokemonList)
+            {
+                Console.WriteLine($"Name : {item.Name}");
+                Console.WriteLine($"Name : {item.Types1.ComponentName}");
+                Console.WriteLine($"nbAttack : {item.ListAttacks.Count}");
+            }
 
-            game.gameScript();
+
+            types1.AddStrength(types2);
+            types2.AddWeakness(types1);
+            List<Types> listType = new List<Types>();
+            listType.Add(types1);
+            listType.Add(types2);
+            pokemonList = save.LoadGame("testPlayer11", game, bag2, listType);
+            Console.WriteLine($"Pos : {game.PosX} , {game.PosY}"); 
+            Console.WriteLine($"Key : {bag2.NbKey} ,  Pokeball : {bag2.NbPokeball}, potion : {bag2.NbPotion}, nbAttack : {bag2.AttackBoost}, nbDef : {bag2.DefBoost}, nbSpeed ; {bag2.SpeedBoost}");
+            foreach (var item in pokemonList)
+            {
+                Console.WriteLine($"Name : {item.Name}");
+                Console.WriteLine($"Name : {item.Types1.ComponentName}");
+                Console.WriteLine($"nbAttack : {item.ListAttacks.Count}");
+            }
+            //game.gameScript();
 
         }
     }

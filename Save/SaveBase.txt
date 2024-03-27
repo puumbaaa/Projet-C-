@@ -1,4 +1,3 @@
-NomDuJoueur
 PosX
 PosY
 nbKey

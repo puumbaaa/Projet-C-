@@ -22,7 +22,6 @@ namespace Porjet_C_
             using (FileStream playerFile = File.Create(fileName));
             using (StreamWriter writePlayerFile = File.AppendText(fileName))
             {
-                writePlayerFile.WriteLine(playerName);
                 writePlayerFile.WriteLine(game.PosX);
                 writePlayerFile.WriteLine(game.PosY);
                 writePlayerFile.WriteLine(bag.NbKey);
@@ -46,13 +45,73 @@ namespace Porjet_C_
                     writePlayerFile.WriteLine(pokemons[i].TotalHealth);
                     writePlayerFile.WriteLine(pokemons[i].ListAttacks.Count);
 
-                    for (int j = 0; j < pokemons[i].ListAttacks.Count; j++)
+                    for (int j = 0; j < 4; j++)
                     {
-                        writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].ComponentName);
-                        writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].AttackStat);
-                        writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OTypes.ComponentName);
+                        if (pokemons[i].ListAttacks.Count > j)
+                        {
+                            writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].ComponentName);
+                            writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].AttackStat);
+                            writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OTypes.ComponentName);
+                        }
+                        else
+                        {
+                            writePlayerFile.WriteLine("");
+                            writePlayerFile.WriteLine("");
+                            writePlayerFile.WriteLine("");
+                        }
+                        
                     }
                 }
+            }
+        }
+
+        public List<Pokemon> LoadGame(string playerName, Game game, Bag bag, List<Types> allTypes) 
+        {
+            string fileName = "..\\..\\..\\..\\SAVE\\" + playerName + ".txt";
+            if (File.Exists(fileName)) 
+            {
+                string[] lines = File.ReadAllLines(fileName);
+                game.setPos(Int32.Parse(lines[0]), Int32.Parse(lines[1]));
+                bag.setObjectInBag(Int32.Parse(lines[2]), Int32.Parse(lines[3]), Int32.Parse(lines[4]), Int32.Parse(lines[5]), Int32.Parse(lines[6]), Int32.Parse(lines[7]));
+
+                int nbPokemon = Int32.Parse(lines[8]);
+                List<Pokemon> pokemonList = new List<Pokemon>();
+                for (int i = 0; i < nbPokemon; i++)
+                {
+
+                    Types pokmeonType = null;
+                    int currentPokemon = 9 + (11+12)*i;
+                    foreach (var item in allTypes)
+                    {
+                        if (item.ComponentName == lines[currentPokemon+4])
+                        {
+                            pokmeonType = item;
+                        }
+                    }
+                    Pokemon newPokemon = new Pokemon(lines[currentPokemon], Int32.Parse(lines[currentPokemon + 1]), Int32.Parse(lines[currentPokemon + 2]), Int32.Parse(lines[currentPokemon + 3]), pokmeonType, Int32.Parse(lines[currentPokemon + 5]), Int32.Parse(lines[currentPokemon + 6]), Int32.Parse(lines[currentPokemon + 7]), Int32.Parse(lines[currentPokemon + 8]), Int32.Parse(lines[currentPokemon + 9]), false);
+                    for (int j = 0; j < Int32.Parse(lines[currentPokemon+10]); j++)
+                    {
+                        string name = lines[currentPokemon+10+j*3];
+                        Types types = null;
+                        foreach (var item in allTypes)
+                        {
+                            if (item.ComponentName == lines[currentPokemon + 10 + j * 3 +1])
+                            {
+                                types = item;
+                            }
+                        }
+                        int attack= Int32.Parse(lines[currentPokemon + 10 + j * 3 + 2]); 
+                        Attack newAttack = new Attack(name, types, attack);
+                        newPokemon.setAttck(newAttack);
+                    }
+                    pokemonList.Add(newPokemon);
+                }
+
+                return pokemonList;
+            }
+            else
+            {
+                throw new Exception();
             }
         }
     }

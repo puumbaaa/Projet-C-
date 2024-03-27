@@ -59,12 +59,11 @@ namespace game
             _posX = x;
             _posY = y;
         }
+        public void setPos(int x, int y) { PosX = x; PosY = y; }
         public void gameScript()
         {
-            int x = 60;
-            int y = 15;
-            _posX = x;
-            _posY = y;
+            int x = PosX;
+            int y = PosY;
             Console.SetCursorPosition(x, y);
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
