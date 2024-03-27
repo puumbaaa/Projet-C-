@@ -12,10 +12,13 @@ namespace Porjet_C_
     {
         GameObject _pokemons;
         public GameObject Pokemons { get => _pokemons; private set => _pokemons = value; }
+        
+
         public MenuPokemon(string title, GameObject pokemons) : base(title) 
         {
             Pokemons = pokemons;
         }
+        
 
         public string DisplayPokemonMenue(FileReader map, int itemValue)
         {
@@ -87,6 +90,10 @@ namespace Porjet_C_
                         //type
                         case 27:
                             string newStringType = pokemon.Types1.ComponentName;
+                            if (newStringType.Length > 9)
+                            {
+                                newStringType = newStringType.Remove(9);
+                            }
                             while (newStringType.Length < 9)
                             {
                                 newStringType += " ";
@@ -115,7 +122,7 @@ namespace Porjet_C_
                             }
                             else
                             {
-                                finalMap += "              ";
+                                finalMap += "               ";
                             }
                             finalMap += " ";
                             i += 14;
@@ -177,7 +184,7 @@ namespace Porjet_C_
                             }
                             else
                             {
-                                finalMap += "              ";
+                                finalMap += "               ";
                             }
                             finalMap += " ";
                             i += 14;
@@ -230,7 +237,7 @@ namespace Porjet_C_
                             }
                             else
                             {
-                                finalMap += "              ";
+                                finalMap += "               ";
                             }
                             finalMap += " ";
                             i += 14;

@@ -10,16 +10,20 @@ namespace Porjet_C_
     internal class Menu
     {
         string _title;
+        bool _isDisplay;
 
         public string Title { get => _title; private set => _title = value;  }
+        public bool IsDisplay { get => _isDisplay; private set => _isDisplay = value; }
 
         public Menu(string title)
         {
             Title = title;
+            IsDisplay = false;
         }
 
         public string DisplayMenu(FileReader map, GameObject gameObject, int menuItem)
         {
+            IsDisplay = true;
             int nbLine = gameObject.ComponentsList.Count +2;
             string menu = map.sText.Remove(map.sText.Length-120*nbLine - nbLine*2);
             int indexTitle = 0;
