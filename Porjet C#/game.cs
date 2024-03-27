@@ -35,7 +35,6 @@ namespace game
             _map.mapSet(_mapFile.sText);
 
             Console.SetCursorPosition(0, 0);
-            Console.SetBufferSize(120, 31);
 
             
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.Escape };
@@ -132,7 +131,7 @@ namespace game
 
                     }
                 }
-                if (_inputManager.IsKey((ConsoleKey)37))
+                if (_inputManager.IsKey((ConsoleKey)27))
                 {
                     return 1;
                 }

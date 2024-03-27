@@ -23,13 +23,14 @@ namespace Porjet_C_
         {
             Title = title;
             IsDisplay = false;
+            //_player = player;
         }
 
-        public int DisplayMenu(FileReader map, GameObject gameObject, int menuItem, int lastState)
+        public string DisplayMenu(FileReader map, GameObject gameObject, int menuItem)
         {
             IsDisplay = true;
-            int nbLine = gameObject.ComponentsList.Count +2;
-            string menu = map.sText.Remove(map.sText.Length-120*nbLine - nbLine*2);
+            int nbLine = gameObject.ComponentsList.Count;
+            string menu = map.sText.Remove(map.sText.Length - 120 * nbLine - nbLine * 2);
             int indexTitle = 0;
             for (int i = 0; i < 120; i++)
             {
@@ -39,7 +40,7 @@ namespace Porjet_C_
                 }
                 else
                 {
-                    menu += Title[indexTitle] ;
+                    menu += Title[indexTitle];
                     indexTitle++;
                 }
             }
@@ -52,16 +53,19 @@ namespace Porjet_C_
                     {
                         menu += " ";
                     }
-                    else if (i==11 && (j +1) != menuItem)
+                    else if (i == 11 && (j + 1) != menuItem)
                     {
                         menu += "_";
-                    }else if (i==11 && (j +1) == menuItem)
+                    }
+                    else if (i == 11 && (j + 1) == menuItem)
                     {
                         menu += ">";
-                    }else if (i==12)
+                    }
+                    else if (i == 12)
                     {
                         menu += " ";
-                    }else
+                    }
+                    else
                     {
                         menu += gameObject.ComponentsList[j].ComponentName[indexTitle];
                         indexTitle++;
@@ -72,7 +76,7 @@ namespace Porjet_C_
             {
                 menu += "*";
             }
-            return lastState;
+            return menu;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Porjet_C_
         }
         
 
-        public string DisplayPokemonMenue(FileReader map, int itemValue)
+        public int DisplayPokemonMenue(FileReader map, int itemValue, int lastState)
         {
             Pokemon pokemon = (Pokemon)Pokemons.ComponentsList[itemValue];
 
@@ -247,7 +247,8 @@ namespace Porjet_C_
                 }
 
             }
-            return finalMap + "******";
+            Console.WriteLine(finalMap + "******");
+            return lastState;
         }
     }
 }

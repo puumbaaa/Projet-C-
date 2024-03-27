@@ -7,7 +7,7 @@ using Porjet_C_;
 
 namespace Porjet_C_
 {
-    internal class Attack
+    internal class Attack : Component
     {
         float _attackStat;
         Types _oTypes;
@@ -15,7 +15,7 @@ namespace Porjet_C_
         public float AttackStat { get => _attackStat; private set => _attackStat = value; }
         public Types OTypes { get => _oTypes; private set => _oTypes = value;  }
 
-        public Attack(Types types, float attack)
+        public Attack(string ComponentName, Types types, float attack) : base(ComponentName)
         {
             OTypes = types;
             AttackStat = attack;
