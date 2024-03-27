@@ -1,4 +1,5 @@
-﻿using Input;
+﻿using Gridd;
+using Input;
 using Porjet_C_;
 using System;
 using System.Collections.Generic;
@@ -222,6 +223,20 @@ namespace Combat
 
             if (attackState == AttackState.ATTACK4)
                 attack.AttackChose = attack.Attack4.ToList();
+        }
+
+        public void UseAttack(AttackList attack, Grid grid)
+        {
+                for (int i = 0; i < attack.AttackChose.Count(); i++)
+                {
+                    for (int j = 0; j < grid.gridSlots.Count(); j++)
+                    {
+                        if (attack.AttackChose[i] == j && grid.gridSlots[j] != 0)
+                        {
+
+                        }
+                    }
+                }
         }
 
     } // Class End

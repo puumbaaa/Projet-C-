@@ -66,7 +66,6 @@ namespace test
             CombatMenu combatMenu = new CombatMenu();
             AttackList attack = new AttackList();
 
-
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
@@ -94,10 +93,14 @@ namespace test
             int m_Case;
 
             // Draw Enemy
-            for (int i = 0; i < monster1File.GetLineCount(sMonster1); i++)
+            for (int i = 0; i < 2; i++)
             {
-                Console.SetCursorPosition(grid.combatGrid[m_EnemyCase, 0], grid.combatGrid[m_EnemyCase, 1] + i);
-                monster1File.PrintFileLine(sMonster1, i);
+                m_Case = i + 13;
+                for (int j = 0; j < monster1File.GetLineCount(sMonster1); j++)
+                {
+                    Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                    monster1File.PrintFileLine(sMonster1, j);
+                }
             }
 
 
@@ -181,8 +184,7 @@ namespace test
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 inputManager.Update(keyInfo);
 
-
-                
+ 
                 // Move Left
                 if (x >= 1)
                 {
@@ -225,18 +227,6 @@ namespace test
                     }
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
@@ -245,10 +235,7 @@ namespace test
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            
                 combatMenu.SelectMenu(inputManager);
-
-
 
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
@@ -262,27 +249,29 @@ namespace test
                 // Draw Grid
                 combatGridFile.printFile();
 
-
-                
-
-
-
                 // Draw Combat Menu
                 Console.SetCursorPosition(0, 28);
 
                 if (combatMenu.globalState != GlobalState.OUT)
                     combatMenu.SetGlobalMenu();
 
+
+
                 // Attack Menu
                 if (combatMenu.attackState != AttackState.OUT)
                 {
+
+                    // Use Attack
+                    if (inputManager.IsKey((ConsoleKey)13)) // Enter
+                    {
+                        combatMenu.UseAttack(attack, grid);
+                    }
+
                     // Draw Attack Menu
                     combatMenu.SetAttackMenu();
 
-
                     // Show Attack Cases
                     combatMenu.ShowAttackCases(attack);
-
 
                     // Draw Selected Cases
                     for (int i = 0; i < attack.AttackChose.Count() ; i++)
@@ -294,18 +283,15 @@ namespace test
                             caseFullFile.PrintFileLine(sCaseFull, j);
                         }
                     }
-                    
-
-                    if (inputManager.IsKey((ConsoleKey)13)) // Enter
-                    { }
 
                 }
 
 
                 // Draw Enemy
-                for (int i = 0; i < attack.AttackChose.Count(); i++)
+                for (int i = 0; i < 2; i++)
                 {
-                    m_Case = attack.AttackChose[i];
+                    m_Case = i+13;
+                    grid.gridSlots[m_Case] = 1;
                     for (int j = 0; j < monster1File.GetLineCount(sMonster1); j++)
                     {
                         Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
