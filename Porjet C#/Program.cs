@@ -18,7 +18,32 @@ namespace test
             Component bag = new Bag("bag");
             player.AddComponent(playerRender);
             player.AddComponent(bag);
+            //Faire une liste de pokemon pour le joueur?
+            Bag bag2 = new Bag("Bag2");
+            Objects object1 = new Objects("def", 10);
+
+            List<Pokemon> pokemonList = new List<Pokemon>();
+            Types types1 = new Types("fire");
+            Types types2 = new Types("water");
+            Attack attack1 = new Attack("Attack1", types1, 10);
+            Attack attack2 = new Attack("Attack2", types2, 20);
+            Attack attack3 = new Attack("Attack3", types2, 30);
+            Attack attack4 = new Attack("Attack4", types1, 40);
+            Pokemon pokemon1 = new Pokemon("Pokemon1", 10, 100, 200, types1, 111, 222, 333, 444, 555, false);
+            pokemon1.setAttck(attack1);
+            pokemon1.setAttck(attack2);
+            Pokemon pokemon2 = new Pokemon("Pokemon1", 1000, 10, 20, types2, 1111, 2222, 3333, 4444, 5555, false);
+            pokemon2.setAttck(attack3);
+            pokemon2.setAttck(attack4);
+            pokemonList.Add(pokemon1);
+            pokemonList.Add(pokemon2);
+            bag2.AddObject(object1);
+
             Game game = new Game(player);
+
+            Save save = new Save();
+            save.SaveTheGame("testPlayer", game, bag2, pokemonList);
+
             game.gameScript();
 
         }

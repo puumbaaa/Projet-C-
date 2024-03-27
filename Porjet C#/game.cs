@@ -21,7 +21,11 @@ namespace game
         Map _map = new Map();
         GameObject _player;
         InputManager _inputManager = new InputManager();
+        int _posX;
+        int _posY;
 
+        public int PosX { get => _posX; set => _posX = value; }
+        public int PosY { get => _posY; set => _posY = value; }
         public Game(GameObject player)
         {
             _player = player;  
@@ -40,6 +44,9 @@ namespace game
             
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow };
             _inputManager.Init(inputKeys);
+
+            PosX = 60;
+            PosY = 15;
         }
         public void update(int x, int y)
         {
@@ -49,11 +56,15 @@ namespace game
             Console.SetCursorPosition(x, y);
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
+            _posX = x;
+            _posY = y;
         }
         public void gameScript()
         {
             int x = 60;
             int y = 15;
+            _posX = x;
+            _posY = y;
             Console.SetCursorPosition(x, y);
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
