@@ -67,6 +67,8 @@ namespace test
             CombatMenu combatMenu = new CombatMenu();
             AttackList attack = new AttackList();
 
+
+
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
