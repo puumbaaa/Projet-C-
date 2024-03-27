@@ -56,7 +56,7 @@ namespace game
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
             Console.CursorVisible = false;
         }
-        public void gameScript()
+        public int gameScript()
         {
             
             while (true)
@@ -132,10 +132,14 @@ namespace game
 
                     }
                 }
-                
+                if (_inputManager.IsKey((ConsoleKey)37))
+                {
+                    return 1;
+                }
+
                 if (((CaseState)_map._mapTab[_playerY, _playerX].ComponentsList[0]).StartFight())
                 {
-                    //return;
+                    return 2;
                 }
                 else if (_map._mapTab[_playerY, _playerX].ComponentsList.Count != 1)
                 {

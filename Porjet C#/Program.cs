@@ -9,7 +9,6 @@ namespace test
     {
 
         enum StateMachineGame {map,menu,combat}
-        enum Transition {openMenu,closeMenu,StartFight,EndFight}
 
         static void Main(string[] args)
         {
@@ -19,8 +18,26 @@ namespace test
             Component bag = new Bag("bag");
             player.AddComponent(playerRender);
             player.AddComponent(bag);
+
+            StateMachineGame stateMachineGame = new StateMachineGame();
             Game game = new Game(player);
-            game.gameScript();
+            int lastState = 0;
+            switch (stateMachineGame)
+            {
+                case 0:
+                    stateMachineGame = (StateMachineGame)game.gameScript();
+                    lastState = 0; 
+                    break;
+                case (StateMachineGame)1:
+                    lastState = 1;
+                    break;
+                case (StateMachineGame)2:
+                    lastState = 2;
+                    break;
+
+            }
+            
+            
 
         }
     }

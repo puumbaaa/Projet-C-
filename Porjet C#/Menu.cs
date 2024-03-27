@@ -1,4 +1,5 @@
-﻿using Mapp;
+﻿using Input;
+using Mapp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace Porjet_C_
 {
     internal class Menu
     {
+        GameObject _player;
+        InputManager _inputManager = new InputManager();
+        FileReader _mapFile = new FileReader();
         string _title;
         bool _isDisplay;
 
@@ -21,7 +25,7 @@ namespace Porjet_C_
             IsDisplay = false;
         }
 
-        public string DisplayMenu(FileReader map, GameObject gameObject, int menuItem)
+        public int DisplayMenu(FileReader map, GameObject gameObject, int menuItem, int lastState)
         {
             IsDisplay = true;
             int nbLine = gameObject.ComponentsList.Count +2;
@@ -68,7 +72,7 @@ namespace Porjet_C_
             {
                 menu += "*";
             }
-            return menu;
+            return lastState;
         }
     }
 }
