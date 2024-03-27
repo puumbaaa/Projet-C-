@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Combat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class AttackList
+    public class AttackList
     {
         #region Attacks List
 
@@ -49,5 +50,7 @@ namespace Porjet_C_
             else return Error;
 
         }
+
+        
     }
 }
