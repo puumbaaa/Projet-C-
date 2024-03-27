@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Input;
+using Porjet_C_;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,7 @@ namespace Combat
 
     public class CombatMenu
     {
+        
         public GlobalState globalState;
         public AttackState attackState;
         public void SetGlobalMenu() {
@@ -138,16 +141,88 @@ namespace Combat
         }
 
 
-        public void SelectMenu()
+        public void SelectMenu(InputManager input)
         {
-            if(globalState == GlobalState.ATTACK)
-            {
+            // Global Menu
 
+            // Go to Left in Attacks Menu
+            if (attackState != AttackState.OUT && attackState != AttackState.ATTACK1)
+            {
+                if (input.IsKey((ConsoleKey)37)) // Left
+                {
+                    attackState -= 1;
+                }
+            }
+
+            // Go to Right in Combat Menu
+            if (attackState != AttackState.OUT && attackState != AttackState.ATTACK4)
+            {
+                if (input.IsKey((ConsoleKey)39)) // Right
+                {
+                    attackState += 1;
+                }
+            }
+
+
+            // Combat Menu
+
+            // Go to Left in Combat Menu
+            if (globalState > GlobalState.ATTACK && globalState != GlobalState.OUT)
+            {
+                if (input.IsKey((ConsoleKey)37)) // Left
+                {
+                    globalState -= 1;
+                }
+            }
+
+            // Go to Right in Combat Menu
+            if (globalState < GlobalState.FLEE && globalState != GlobalState.OUT)
+            {
+                if (input.IsKey((ConsoleKey)39)) // Right
+                {
+                    globalState += 1;
+                }
+            }
+
+
+            // Select Attack Menu in combat
+            if (globalState == GlobalState.ATTACK && attackState == AttackState.OUT)
+            {
+                if (input.IsKey((ConsoleKey)13)) // Enter
+                {
+                    attackState = AttackState.ATTACK1;
+                    globalState = GlobalState.OUT;
+                }
+            }
+
+            // Return to combat Menu
+            if (globalState == GlobalState.OUT)
+            {
+                if (input.IsKey((ConsoleKey)8)) // Backspace
+                {
+                    globalState = GlobalState.ATTACK;
+
+                    attackState = AttackState.OUT;
+                }
             }
 
 
         }
 
+        public void ShowAttackCases(AttackList attack)
+        {
+            if (attackState == AttackState.ATTACK1)
+                attack.AttackChose = attack.Attack1.ToList();
+
+            if (attackState == AttackState.ATTACK2)
+                attack.AttackChose = attack.Attack2.ToList();
+
+            if (attackState == AttackState.ATTACK3)
+                attack.AttackChose = attack.Attack3.ToList();
+
+            if (attackState == AttackState.ATTACK4)
+                attack.AttackChose = attack.Attack4.ToList();
+        }
 
     } // Class End
 } // Namespace End

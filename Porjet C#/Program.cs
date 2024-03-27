@@ -226,89 +226,38 @@ namespace test
                 }
 
 
-                if (inputManager.IsKey((ConsoleKey)13)) // Enter
-                {
-                    // Select Attack Menu in combat
-                    if (combatMenu.globalState == GlobalState.ATTACK && combatMenu.attackState == AttackState.OUT)
-                    {
-                        combatMenu.attackState = AttackState.ATTACK1;
-                        combatMenu.globalState = GlobalState.OUT;
-                    }
-
-                    
-                }
-
-                
-                if (inputManager.IsKey((ConsoleKey)8)) // Backspace
-                {
-                    if (combatMenu.globalState == GlobalState.OUT)
-                    {
-                        combatMenu.globalState = GlobalState.ATTACK;
-
-                        combatMenu.attackState = AttackState.OUT;
-                    }
-                }
-
-                /*//----------------------------------------------------------------------------------|
-                |                                                                                     |
-                |                                                                                     |
-                |                                  Attack Menu                                        |
-                |                                                                                     |
-                |                                                                                     |
-                *///----------------------------------------------------------------------------------|
-
-                // Global Menu
-
-                // Go to Left in Attacks Menu
-                if (combatMenu.attackState != AttackState.OUT && combatMenu.attackState != AttackState.ATTACK1)
-                {
-                    if (inputManager.IsKey((ConsoleKey)37)) // Left
-                    {
-                        combatMenu.attackState -= 1;
-                    }
-                }
-
-                // Go to Right in Combat Menu
-                if (combatMenu.attackState != AttackState.OUT && combatMenu.attackState != AttackState.ATTACK4)
-                {
-                    if (inputManager.IsKey((ConsoleKey)39)) // Right
-                    {
-                        combatMenu.attackState += 1;
-                    }
-                }
-
-
-                // Combat Menu
-
-                // Go to Left in Combat Menu
-                if (combatMenu.globalState > GlobalState.ATTACK && combatMenu.globalState != GlobalState.OUT)
-                {
-                    if (inputManager.IsKey((ConsoleKey)37)) // Left
-                    {
-                        combatMenu.globalState -= 1;
-                    }
-                }
-
-                // Go to Right in Combat Menu
-                if (combatMenu.globalState < GlobalState.FLEE && combatMenu.globalState != GlobalState.OUT)
-                {
-                    if (inputManager.IsKey((ConsoleKey)39)) // Right
-                    {
-                        combatMenu.globalState += 1;
-                    }
-                }
 
 
 
 
-                /*//----------------------------------------------------------------------------------|
-                |                                                                                     |
-                |                                                                                     |
-                |                                  Clear and redraw                                   |
-                |                                                                                     |
-                |                                                                                     |
-                *///----------------------------------------------------------------------------------|
-                Console.Clear();
+
+
+
+
+
+
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Attack Menu                                        |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            
+                combatMenu.SelectMenu(inputManager);
+
+
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Clear and redraw                                   |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+            Console.Clear();
 
                 // Draw Grid
                 combatGridFile.printFile();
@@ -332,19 +281,7 @@ namespace test
 
 
                     // Show Attack Cases
-
-                    //Attack 1
-                    if (combatMenu.attackState == AttackState.ATTACK1)
-                        attack.AttackChose = attack.Attack1.ToList();
-
-                    if (combatMenu.attackState == AttackState.ATTACK2)
-                        attack.AttackChose = attack.Attack2.ToList();
-
-                    if (combatMenu.attackState == AttackState.ATTACK3)
-                        attack.AttackChose = attack.Attack3.ToList();
-
-                    if (combatMenu.attackState == AttackState.ATTACK4)
-                        attack.AttackChose = attack.Attack4.ToList();
+                    combatMenu.ShowAttackCases(attack);
 
 
                     // Draw Selected Cases
@@ -354,21 +291,26 @@ namespace test
                         for (int j = 0; j < caseFullFile.GetLineCount(sCaseFull); j++)
                         {
                             Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                            monster1File.PrintFileLine(sCaseFull, j);
+                            caseFullFile.PrintFileLine(sCaseFull, j);
                         }
                     }
                     
 
                     if (inputManager.IsKey((ConsoleKey)13)) // Enter
                     { }
+
                 }
 
 
                 // Draw Enemy
-                for (int i = 0; i < monster1File.GetLineCount(sMonster1); i++)
+                for (int i = 0; i < attack.AttackChose.Count(); i++)
                 {
-                    Console.SetCursorPosition(grid.combatGrid[m_EnemyCase, 0], grid.combatGrid[m_EnemyCase, 1] + i);
-                    monster1File.PrintFileLine(sMonster1, i);
+                    m_Case = attack.AttackChose[i];
+                    for (int j = 0; j < monster1File.GetLineCount(sMonster1); j++)
+                    {
+                        Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                        monster1File.PrintFileLine(sMonster1, j);
+                    }
                 }
 
 
