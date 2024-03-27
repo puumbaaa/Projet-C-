@@ -37,7 +37,7 @@ namespace Porjet_C_
 
         public void setObjectInBag(int key, int pokeball, int potion, int attackBoost, int defBoost, int speedBoost)
         {
-            ObjectsList = new List<Objects>();
+            ObjectsList.Clear();
             UpdateBag();
             Objects keyBase = new Objects(true, false);
             Objects pokeballBase = new Objects(false, true);
