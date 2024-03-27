@@ -15,19 +15,7 @@ namespace Mapp
         public string sText
         {
             get => m_sText;
-            set => m_sText = value;
-        }
-
-        public int GetLineCount(string file)
-        {
-            if (File.Exists(file))
-            {
-                return File.ReadLines(file).Count();
-            }
-            else
-            {
-                return 0;
-            }
+            private set => m_sText = value;
         }
 
         public int GetLineCount(string file)
