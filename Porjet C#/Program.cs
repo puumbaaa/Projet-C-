@@ -8,7 +8,8 @@ namespace test
     class Program
     {
 
-    
+        enum StateMachineGame {map,menu,combat}
+        enum Transition {openMenu,closeMenu,StartFight,EndFight}
 
         static void Main(string[] args)
         {

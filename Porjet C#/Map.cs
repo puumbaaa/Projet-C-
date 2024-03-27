@@ -15,7 +15,7 @@ namespace Mapp
         public void  mapSet(string file) 
         {
             int j = 0;
-            for (int i = 0; i < 3650; i++)
+            for (int i = 0; i < 3659; i++)
             {
                 if (file[i] == 'H')
                 {
