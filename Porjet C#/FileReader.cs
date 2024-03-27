@@ -40,7 +40,7 @@ namespace Mapp
             }
         }
 
-        public void printFile()
+        public void PrintFile()
         {
             Console.WriteLine(sText);
         }

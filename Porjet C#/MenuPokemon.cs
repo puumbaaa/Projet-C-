@@ -26,7 +26,7 @@ namespace Porjet_C_
 
             string menuPokemon = DisplayMenu(map, Pokemons, itemValue+1);
             FileReader newFileReader = new FileReader();
-            newFileReader.setFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
+            newFileReader.SetFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
             string finalMap = "";
             int nbDash = 0;
             for (int i = 0; i < menuPokemon.Length; i++)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Mapp;
 using Input;
+
 using System;
 
 using Porjet_C_;
@@ -29,8 +30,8 @@ namespace game
             _player = player;  
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
 
-            _mapFile.setFile(sMap);
-            _mapFile.printFile();
+            _mapFile.SetFile(sMap);
+            _mapFile.PrintFile();
             
             _map.mapSet(_mapFile.sText);
 
@@ -50,7 +51,7 @@ namespace game
         public void update()
         {
             Console.Clear();
-            _mapFile.printFile();
+            _mapFile.PrintFile();
 
             Console.SetCursorPosition(_playerX, _playerY);
             Console.WriteLine(((Render)_player.ComponentsList[0]).RenderString);
