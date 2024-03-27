@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Pokemon
+    internal class Pokemon : Component
     {
-        string _name;
         int _level;
         int _currentExp;
         int _totalExp;
@@ -27,7 +26,6 @@ namespace Porjet_C_
         List<Objects> _listUsedObjects;
 
 
-        public string Name { get => _name; private set => _name = value; }
         public int Level { get => _level; private set => _level = value; }
         public int CurrentExp { get => _currentExp; private set => _currentExp = value; }
         public int TotalExp { get => _totalExp; private set => _totalExp = value; }
@@ -45,9 +43,8 @@ namespace Porjet_C_
         public List<Attack> ListAttacks { get => _listAttacks; private set => _listAttacks = new(10); }
         public List<Objects> ListUsedObjects { get => _listUsedObjects; private set => _listUsedObjects = new(10); }
 
-        public Pokemon(string name, int level, int currentExp, int totalExp, Types types1, float attackStat, float defStat, float speedStat, float currentHealth, float totalHealth, bool isKO)
+        public Pokemon(string name, int level, int currentExp, int totalExp, Types types1, float attackStat, float defStat, float speedStat, float currentHealth, float totalHealth, bool isKO) : base(name)
         {
-            Name = name;
             Level = level;
             CurrentExp = currentExp;
             TotalExp = totalExp;

@@ -15,7 +15,7 @@ namespace Mapp
         public string sText
         {
             get => m_sText;
-            private set => m_sText = value;
+            set => m_sText = value;
         }
 
 
