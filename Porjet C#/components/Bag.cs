@@ -9,6 +9,7 @@ namespace Porjet_C_
     internal class Bag : Component
     {
         List<Objects> _objectsList;
+        List<Pokemon> _pokemonList;
         int _nbKey;
         int _nbPokeball;
         int _nbPotion;
@@ -17,6 +18,7 @@ namespace Porjet_C_
         int _speedBoost;
 
         public List<Objects> ObjectsList { get => _objectsList; private set => _objectsList = new(10); }
+        public List<Pokemon> PokemonList { get => _pokemonList; private set => _pokemonList = new(6); }
         public int NbKey { get => _nbKey; private set => _nbKey = value; }
         public int NbPokeball { get => _nbPokeball; private set => _nbPokeball = value; }
         public int NbPotion { get => _nbPotion; private set => _nbPotion = value; }

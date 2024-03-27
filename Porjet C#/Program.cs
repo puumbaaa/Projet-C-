@@ -46,7 +46,7 @@ namespace test
             pokemon1.setAttck(attack1);
             GameObject pokemonGameObject = new GameObject();
             pokemonGameObject.AddComponent(pokemon1);
-            MenuPokemon menuPokemonTest = new MenuPokemon("Pokemons", pokemonGameObject);
+            Menu menuPokemonTest = new Menu("Pokemons", pokemonGameObject);
 
             StateMachineGame stateMachineGame = new StateMachineGame();
             Game game = new Game(player);
@@ -59,10 +59,10 @@ namespace test
                         lastState = 0;
                         break;
                     case (StateMachineGame)1:
-                        stateMachineGame = (StateMachineGame)menuPokemonTest.DisplayPokemonMenue(_mapFile, 0, lastState);
-                        lastState = 1;
+                        stateMachineGame = (StateMachineGame)menuPokemonTest.MenuScript(_mapFile,1, lastState);
                         break;
                     case (StateMachineGame)2:
+                        stateMachineGame = 0;
                         lastState = 2;
                         break;
 

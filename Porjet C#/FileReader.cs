@@ -24,7 +24,7 @@ namespace Mapp
             if (File.Exists(file))
             {
                 // Read entire text file content in one string
-                 m_sText = File.ReadAllText(file);
+                 sText = File.ReadAllText(file);
             }
         }
 
