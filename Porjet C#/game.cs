@@ -12,6 +12,7 @@ using Porjet_C_;
 using System.Security.Cryptography;
 using System.IO.Compression;
 using System.Numerics;
+using Porjet_C_.components;
 
 namespace game
 {
@@ -23,9 +24,11 @@ namespace game
         InputManager _inputManager = new InputManager();
         int _playerX = 0;
         int _playerY = 0;
+        bool _isDisplayDialogue;
 
         public Game(GameObject player)
         {
+            _isDisplayDialogue = false;
             _player = player;  
             string sMap = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
 
@@ -66,6 +69,8 @@ namespace game
 
             while (true)
             {
+                //test dialogue
+                Dialogue dialogue = new Dialogue("dialogue");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 _inputManager.Update(keyInfo);
@@ -165,6 +170,22 @@ namespace game
                         }
                     }
 
+                }
+                    //Dialogue
+                if (_playerX == 92 && _playerY==16)
+                {
+                    if (!_isDisplayDialogue)
+                    {
+                        Console.WriteLine(dialogue.Dialogues[0]);
+                        Console.WriteLine(dialogue.Dialogues[1]);
+                        Console.WriteLine(dialogue.Dialogues[2]);
+                        Console.WriteLine(dialogue.Dialogues[3]);
+                        _isDisplayDialogue = true;
+                    }
+                }
+                else
+                {
+                    _isDisplayDialogue = false;
                 }
             }
         }
