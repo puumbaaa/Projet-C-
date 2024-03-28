@@ -33,11 +33,11 @@ namespace Porjet_C_
                 writePlayerFile.WriteLine(pokemons.Count);
                 for (int i = 0; i < pokemons.Count; i++)
                 {
-                    writePlayerFile.WriteLine(pokemons[i].Name);
+                    writePlayerFile.WriteLine(pokemons[i].ComponentName);
                     writePlayerFile.WriteLine(pokemons[i].Level);
                     writePlayerFile.WriteLine(pokemons[i].CurrentExp);
                     writePlayerFile.WriteLine(pokemons[i].TotalExp);
-                    writePlayerFile.WriteLine(pokemons[i].Types1.ComponentName);
+                    writePlayerFile.WriteLine(pokemons[i].Types1.Name);
                     writePlayerFile.WriteLine(pokemons[i].AttackStatBase);
                     writePlayerFile.WriteLine(pokemons[i].DefStatBase);
                     writePlayerFile.WriteLine(pokemons[i].SpeedStatBase);
@@ -51,7 +51,7 @@ namespace Porjet_C_
                         {
                             writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].ComponentName);
                             writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].AttackStat);
-                            writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OTypes.ComponentName);
+                            writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OTypes.Name);
                         }
                         else
                         {
@@ -83,7 +83,7 @@ namespace Porjet_C_
                     int currentPokemon = 9 + (11+12)*i;
                     foreach (var item in allTypes)
                     {
-                        if (item.ComponentName == lines[currentPokemon+4])
+                        if (item.Name == lines[currentPokemon+4])
                         {
                             pokmeonType = item;
                         }
@@ -95,7 +95,7 @@ namespace Porjet_C_
                         Types types = null;
                         foreach (var item in allTypes)
                         {
-                            if (item.ComponentName == lines[currentPokemon + 10 + j * 3 +1])
+                            if (item.Name == lines[currentPokemon + 10 + j * 3 +1])
                             {
                                 types = item;
                             }
