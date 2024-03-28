@@ -223,6 +223,7 @@ namespace Porjet_C_
                     TotalHealth += TotalHealth / 10;
                 }
             }
+            TestMaxStat();
         }
     }
 }
