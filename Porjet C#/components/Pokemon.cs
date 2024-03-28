@@ -111,7 +111,7 @@ namespace Porjet_C_
             }
         }
 
-        public void setAttck( Attack attack)
+        public void setAttack( Attack attack)
         {
             ListAttacks.Add(attack);
         }
@@ -148,9 +148,12 @@ namespace Porjet_C_
         public void TakeDamage(Pokemon pokemonEnemy, Attack EnemyAttack, Objects EnemyObject)//if enemy has object
         {
             float totalDamage = 0;
-            if (EnemyObject.StatName == "attack")
+            if (EnemyObject != null)
             {
-                totalDamage += EnemyObject.StatValue / 100;
+                if (EnemyObject.StatName == "attack")
+                {
+                    totalDamage += EnemyObject.StatValue / 100;
+                }
             }
             TakeDamage(pokemonEnemy, EnemyAttack, totalDamage);
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Component
+    public class Component
     {
         string _componentName;
 

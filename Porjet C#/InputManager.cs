@@ -5,7 +5,7 @@ namespace Input
 {
     enum KeyState { Press, Up, Down, NoPress };
 
-    class InputManager
+    public class InputManager
     {
         private List<ConsoleKey> keys = new List<ConsoleKey>();
         private List<KeyState> keyStates = new List<KeyState>();

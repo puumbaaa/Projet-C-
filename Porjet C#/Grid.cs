@@ -1,42 +1,90 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Porjet_C_
+using Porjet_C_;
+namespace Gridd
 {
     public class Grid
     {
-        int[,] CombatGrid = new int[,] {
 
-            // Ally
-            { 2, 3 }, // Case 0
-            { 2, 22 }, // Case 1
-            { 2, 41 }, // Case 2
+        int[,] _combatGrid; 
+        GameObject[] _gridSlots;
 
-            { 11, 3 }, // Case 3
-            { 11, 22 }, // Case 4
-            { 11, 41 }, // Case 5
+        public int[,] combatGrid { get => _combatGrid; private set => _combatGrid = value; }
+        public GameObject[] gridSlots { get => _gridSlots; set => _gridSlots = value; }
 
-            { 20 , 3 }, // Case 6
-            { 20 , 22 }, // Case 7
-            { 20 , 41 }, // Case 8
+        /*//----------------------------------------------------------------------------------|
+        |                                                                                     |
+        |                                                                                     |
+        |                                   Set Grids                                         |
+        |                                                                                     |
+        |                                                                                     |
+        *///----------------------------------------------------------------------------------|
 
-            //Enemy
-            { 2, 65 }, // Case 9
-            { 2, 84 }, // Case 10
-            { 2, 103 }, // Case 11
 
-            { 11, 65 }, // Case 12
-            { 11, 84 }, // Case 13
-            { 11, 103 }, // Case 14
+        void SetCombatGrid()
+        {
+            
 
-            { 20 , 65 }, // Case 15
-            { 20 , 84 }, // Case 16
-            { 20 , 103 } // Case 17
+            _combatGrid = new int[,] {
+
+                // Ally
+                {2, 0}, // Case 0
+                {21, 0}, // Case 1
+                {40, 0}, // Case 2
+
+                {2, 9}, // Case 3
+                {21, 9}, // Case 4
+                {40, 9}, // Case 5
+
+                {2, 18}, // Case 6
+                {21, 18}, // Case 7
+                {40, 18}, // Case 8
+
+                //Enemy
+                {64, 0}, // Case 9
+                {83, 0}, // Case 10
+                {102, 0}, // Case 11
+
+                {64, 9}, // Case 12
+                {83, 9}, // Case 13
+                {102, 9}, // Case 14
+
+                {64, 18}, // Case 15
+                {83, 18}, // Case 16
+                {102, 18} // Case 17
 
             };
+        }
+        void SetCombatSlots()
+        {
+            _gridSlots = new GameObject[17];
+            for (int i = 0; i < 17; i++)
+            {
+                _gridSlots[i] = null;
+            }
+        }
+
+
+        /*//----------------------------------------------------------------------------------|
+        |                                                                                     |
+        |                                                                                     |
+        |                                      Generate Grids                                 |
+        |                                                                                     |
+        |                                                                                     |
+        *///----------------------------------------------------------------------------------|
+
+        public void GenerateGrids()
+        {
+            SetCombatGrid();
+            SetCombatSlots();
+        }
+        
+
 
     }
 }
