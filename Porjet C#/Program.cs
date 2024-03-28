@@ -4,6 +4,7 @@ using game;
 using Mapp;
 using Porjet_C_;
 using System.IO.Compression;
+using System.Runtime.InteropServices;
 
 namespace test
 {
@@ -12,6 +13,13 @@ namespace test
 
         enum StateMachineGame {map,menu,combat}
 
+        [DllImport("kernel32.dll", ExactSpelling = true)]
+        private static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_MAXIMIZE = 3;
         static void Main(string[] args)
         {
             Console.SetCursorPosition(0, 0);
@@ -33,6 +41,9 @@ namespace test
             ((Bag)bag).PokemonList.Add(pokemonGameObject);
             Menu menuPokemonTest = new Menu("Pokemons", player);
 
+            IntPtr handle = GetConsoleWindow();
+            ShowWindow(handle, SW_MAXIMIZE);
+
             StateMachineGame stateMachineGame = new StateMachineGame();
             Game game = new Game(player);
             int lastState = 0;
@@ -52,6 +63,7 @@ namespace test
                         break;
                     case (StateMachineGame)2:
                         stateMachineGame = 0;
+                        Console.WriteLine("fightiiiiiiiiiing");
                         Console.Clear();
                         Console.WriteLine("\x1b[3J");
                         lastState = 2;

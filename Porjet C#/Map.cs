@@ -20,7 +20,8 @@ namespace Mapp
                 if (file[i] == 'H')
                 {
                     GameObject grass = new GameObject();
-                    Component state = new CaseState("grass", true, false, true);
+                    Component state = new CaseState("grass", true, false, true, false);
+                    ((CaseState)state).StartFight();
                     Component bag = new Bag("bag");
                     grass.AddComponent(state);
                     grass.AddComponent(bag);
@@ -42,23 +43,31 @@ namespace Mapp
 
                     _map[i / 122, j] = grass;
                 }
-                else if (file[i] == '|' || file[i] == '_')
+                else if (file[i] == '=')
+                {
+                    GameObject caseBoss = new GameObject();
+                    Component state = new CaseState("caseBoss", true, false, false, false);
+                    ((CaseState)state).IsFight = true;
+                    caseBoss.AddComponent(state);
+                    _map[i / 122, j] = caseBoss;
+                }
+                else if (file[i] == '|' || file[i] == '_' || file[i] == '-')
                 {
                     GameObject wall = new GameObject();
-                    Component state = new CaseState("border", false, true, false);
+                    Component state = new CaseState("border", false, true, false,false);
                     wall.AddComponent(state);
                     _map[i / 122, j] = wall;
                 }
                 else if (file[i] == '/' || file[i] == (char)92){
                     GameObject door = new GameObject();
-                    Component state = new CaseState("door", true, false, false);
+                    Component state = new CaseState("door", false, false, false, true);
                     door.AddComponent(state);
                     _map[i / 122, j] = door;
                 }
                 else
                 {
                     GameObject other = new GameObject();
-                    Component state = new CaseState("case",true,false,false);
+                    Component state = new CaseState("case",true,false,false, false);
                     other.AddComponent(state);
                     _map[i / 122, j] = other;
                 }

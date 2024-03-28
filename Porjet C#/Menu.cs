@@ -81,7 +81,7 @@ namespace Porjet_C_
                     }
                     else if (selectY == 20)
                     {
-
+                        Environment.Exit(0);
                     }
                     DisplayMenu();
                 }
