@@ -45,6 +45,7 @@ namespace Porjet_C_
             Objects attackBase = new Objects("attack", 100);
             Objects defBase = new Objects("def", 100);
             Objects speedBase = new Objects("speed", 100);
+            ObjZero();
             for (int i = 0; i < key; i++)
             {
                 ObjectsList.Add(keyBase);
@@ -64,6 +65,7 @@ namespace Porjet_C_
             {
                 ObjectsList.Add(speedBase);
             }
+            UpdateBag();
         }
         public void AddObject(Objects objects)
         {
