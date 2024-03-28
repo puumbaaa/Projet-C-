@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 namespace Combat
 {
 
+    
+
     public enum GlobalState
     {
         OUT,
@@ -30,7 +32,9 @@ namespace Combat
 
     public class CombatMenu
     {
-        
+
+
+        int ID = 0;
         public GlobalState globalState;
         public AttackState attackState;
         public void SetGlobalMenu() {
@@ -88,54 +92,60 @@ namespace Combat
 
         }
 
-        public void SetAttackMenu()
+        public void SetAttackMenu(GameData gameData)
         {
+            string Attack1 = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[0].ComponentName;
+            string Attack2 = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[1].ComponentName;
+            string Attack3 = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[2].ComponentName;
+            string Attack4 = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[3].ComponentName;
+
             if (attackState == AttackState.ATTACK1)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("                                    Attack1      ");
+                
+                Console.Write("                           " + Attack1 + "      ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("Attack2         ");
-                Console.Write("Attack3        ");
-                Console.Write("Attack4        ");
+                Console.Write(Attack2 + "         ");
+                Console.Write(Attack3 + "        ");
+                Console.Write(Attack4 + "        ");
             }
 
             if (attackState == AttackState.ATTACK2)
             {
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.Write("                                    Attack1      ");
+                Console.Write("                           " + Attack1 + "      ");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Attack2         ");
+                Console.Write(Attack2 + "         ");
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("Attack3        ");
-                Console.Write("Attack4        ");
+                Console.Write(Attack3 + "        ");
+                Console.Write(Attack4 + "        ");
             }
 
             if (attackState == AttackState.ATTACK3)
             {
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.Write("                                    Attack1      ");
-                Console.Write("Attack2         ");
+                Console.Write("                           " + Attack1 + "      ");
+                Console.Write(Attack2 + "         ");
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Attack3        ");
+                Console.Write(Attack3 + "        ");
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("Attack4        ");
+                Console.Write(Attack4 + "        ");
             }
 
             if (attackState == AttackState.ATTACK4)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("                                    Attack1      ");
-                Console.Write("Attack2         ");
-                Console.Write("Attack3        ");
+                Console.Write("                           " + Attack1 + "      ");
+                Console.Write(Attack2 + "         ");
+                Console.Write(Attack3 + "        ");
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Attack4        ");
+                Console.Write(Attack4 + "        ");
 
                 Console.ForegroundColor = ConsoleColor.White;
             }
@@ -210,30 +220,49 @@ namespace Combat
 
         }
 
-        public void ShowAttackCases(AttackList attack)
+        public void SelectAttack(AttackList attack, GameData gameData)
         {
+
             if (attackState == AttackState.ATTACK1)
-                attack.AttackChose = attack.Attack1.ToList();
+            {
+                attack.AttackChoseCases = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[0].OCases.ToList();
+                attack.AttackChose = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[0];
+            }
+                
 
             if (attackState == AttackState.ATTACK2)
-                attack.AttackChose = attack.Attack2.ToList();
+            {
+                attack.AttackChoseCases = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[1].OCases.ToList();
+                attack.AttackChose = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[1];
+            }
+
+
 
             if (attackState == AttackState.ATTACK3)
-                attack.AttackChose = attack.Attack3.ToList();
-
+            {
+                attack.AttackChoseCases = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[2].OCases.ToList();
+                attack.AttackChose = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[2];
+            }
             if (attackState == AttackState.ATTACK4)
-                attack.AttackChose = attack.Attack4.ToList();
+            {
+                attack.AttackChoseCases = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[3].OCases.ToList();
+                attack.AttackChose = ((Pokemon)gameData.PokemonList[ID].ComponentsList[0]).ListAttacks[3];
+            }
         }
 
-        public void UseAttack(AttackList attack, Grid grid)
+        public void UseAttack(AttackList attack, Grid grid, GameData gameData)
         {
-                for (int i = 0; i < attack.AttackChose.Count(); i++)
+                for (int i = 0; i < attack.AttackChoseCases.Count(); i++)
                 {
                     for (int j = 0; j < grid.gridSlots.Count(); j++)
                     {
-                        if (attack.AttackChose[i] == j && grid.gridSlots[j] != 0)
+                        if (attack.AttackChoseCases[i] == j && grid.gridSlots[j] != null)
                         {
-
+                            ((Pokemon)grid.gridSlots[j].ComponentsList[0]).TakeDamage(((Pokemon)grid.gridSlots[j].ComponentsList[0]), attack.AttackChose, null );
+                            if ( ((Pokemon)grid.gridSlots[j].ComponentsList[0]).CurrentHealth <= 0 )
+                            {
+                               grid.gridSlots[j] = null;
+                            }
                         }
                     }
                 }

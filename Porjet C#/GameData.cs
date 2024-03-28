@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using game;
-using Porjet_C_;
-
-namespace Porjet_C_
+﻿namespace Porjet_C_
 {
-    public class GameData
+    public struct GameData
     {
-        public GameData() 
+        List<GameObject> _pokemonList;
+        List<Attack> _attackList;
+
+        public List<GameObject> PokemonList { get => _pokemonList; set => _pokemonList = new(); }
+        public List<Attack> AttackList { get => _attackList; set => _attackList = new(); }
+
+        public void setGameData()
         {
+            AttackList attackList = new AttackList();
+
+            PokemonList = new List<GameObject>();
+            AttackList = new List<Attack>();
+
+
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
@@ -73,6 +77,32 @@ namespace Porjet_C_
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
+            |                                  Attacks                                            |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+            Attack novaStrike = new Attack("Nova Strike", voidType, 300, attackList.novaStrike) ;
+            AttackList.Add(novaStrike);
+            Attack stellarRoar = new Attack("Stellar Roar", mysticType, 300, attackList.stellarRoar);
+            AttackList.Add(novaStrike);
+            Attack lunarShield = new Attack("Lunar Shield", mysticType, 300, attackList.lunarShield);
+            AttackList.Add(novaStrike);
+            Attack celestialBeam = new Attack("Celestial Beam", lightType, 300, attackList.celestialBeam);
+            AttackList.Add(novaStrike);
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
+            |                                  Objects                                            |
+            |                                                                                     |
+            |                                                                                     |
+            *///----------------------------------------------------------------------------------|
+
+
+            /*//----------------------------------------------------------------------------------|
+            |                                                                                     |
+            |                                                                                     |
             |                                  Pokemons                                           |
             |                                                                                     |
             |                                                                                     |
@@ -81,8 +111,13 @@ namespace Porjet_C_
 
             GameObject astraleon = new GameObject();
             Component astraleonStat = new Pokemon("astraleonStat", 1, 0, 100, mysticType, 3, 1, 2, 15, 15, false);
-            Component astraleonRender = new Render("astraleonRender","f");
+            Component astraleonRender = new Render("astraleonRender", "f");
+            ((Pokemon)astraleonStat).setAttack(novaStrike);
+            ((Pokemon)astraleonStat).setAttack(stellarRoar);
+            ((Pokemon)astraleonStat).setAttack(lunarShield);
+            ((Pokemon)astraleonStat).setAttack(celestialBeam);
             astraleon.AddComponent(astraleonStat);
+            PokemonList.Add(astraleon);
             
 
             /*
@@ -92,7 +127,10 @@ namespace Porjet_C_
             Component pikachuStat = new Pokemon();
             pikachu.AddComponent(pikachuStat);
             */
+
         }
+
+
 
 
 

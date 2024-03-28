@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Types : Component
+    public class Types : Component
     {
         List<Types> _weaknessType;
         List<Types> _strengthType;

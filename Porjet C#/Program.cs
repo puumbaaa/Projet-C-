@@ -29,6 +29,7 @@ namespace test
 
             string sCombat =   "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster1 = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
+            string sMonster2 = "..\\..\\..\\..\\ASCII\\Sprites\\monster2.txt";
             string sCaseFull = "..\\..\\..\\..\\ASCII\\Sprites\\caseFull.txt";
 
             /*//----------------------------------------------------------------------------------|
@@ -41,6 +42,7 @@ namespace test
 
             FileReader combatGridFile = new FileReader();
             FileReader monster1File = new FileReader();
+            FileReader monster2File = new FileReader();
             FileReader caseFullFile = new FileReader();
 
             /*//----------------------------------------------------------------------------------|
@@ -53,6 +55,7 @@ namespace test
 
             combatGridFile.SetFile(sCombat);
             monster1File.SetFile(sMonster1);
+            monster2File.SetFile(sMonster2);
             caseFullFile.SetFile(sCaseFull);
 
             /*//----------------------------------------------------------------------------------|
@@ -66,7 +69,7 @@ namespace test
             Grid grid = new Grid();
             CombatMenu combatMenu = new CombatMenu();
             AttackList attack = new AttackList();
-
+            GameData gameData = new GameData();
             
             
 
@@ -81,6 +84,9 @@ namespace test
             //Grid
             grid.GenerateGrids();
 
+
+            gameData.setGameData();
+
             /*//----------------------------------------------------------------------------------|
             |                                                                                     |
             |                                                                                     |
@@ -92,17 +98,22 @@ namespace test
             // Draw Grid
             combatGridFile.PrintFile();
 
-            int m_EnemyCase = 13;
             int m_Case;
+            m_Case = 12;
+            grid.gridSlots[m_Case] = gameData.PokemonList[0];
 
             // Draw Enemy
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < grid.gridSlots.Count(); i++)
             {
-                m_Case = i + 13;
-                for (int j = 0; j < monster1File.GetTextLineCount(); j++)
+                m_Case = i;
+                if (grid.gridSlots[m_Case] != null)
                 {
-                    Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                    monster1File.PrintTextLine(j);
+
+                    for (int j = 0; j < monster2File.GetTextLineCount(); j++)
+                    {
+                        Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                        monster2File.PrintTextLine(j);
+                    }
                 }
             }
 
@@ -227,19 +238,19 @@ namespace test
                     // Use Attack
                     if (inputManager.IsKey((ConsoleKey)13)) // Enter
                     {
-                        combatMenu.UseAttack(attack, grid);
+                        combatMenu.UseAttack(attack, grid, gameData);
                     }
 
                     // Draw Attack Menu
-                    combatMenu.SetAttackMenu();
+                    combatMenu.SetAttackMenu(gameData);
 
                     // Show Attack Cases
-                    combatMenu.ShowAttackCases(attack);
+                    combatMenu.SelectAttack(attack, gameData);
 
                     // Draw Selected Cases
-                    for (int i = 0; i < attack.AttackChose.Count() ; i++)
+                    for (int i = 0; i < attack.AttackChoseCases.Count() ; i++)
                     {
-                        m_Case = attack.AttackChose[i];
+                        m_Case = attack.AttackChoseCases[i];
                         for (int j = 0; j < caseFullFile.GetTextLineCount(); j++)
                         {
                             Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
@@ -249,17 +260,23 @@ namespace test
 
                 }
 
+               
 
                 // Draw Enemy
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < grid.gridSlots.Count(); i++)
                 {
-                    m_Case = i+13;
-                    grid.gridSlots[m_Case] = 1;
-                    for (int j = 0; j < monster1File.GetTextLineCount(); j++)
+                    m_Case = i;
+                    if(grid.gridSlots[m_Case] != null)
                     {
-                        Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
-                        monster1File.PrintTextLine(j);
+                        
+                        for (int j = 0; j < monster2File.GetTextLineCount(); j++)
+                        {
+                            Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                            monster2File.PrintTextLine(j);
+                        }
+
                     }
+                    
                 }
 
 

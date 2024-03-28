@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class GameObject
+    public class GameObject
     {
         List<Component> _componentsList;
         public List<Component> ComponentsList { get => _componentsList; private set => _componentsList = new(10); }
