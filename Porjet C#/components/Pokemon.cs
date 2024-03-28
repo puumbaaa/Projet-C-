@@ -204,6 +204,7 @@ namespace Porjet_C_
             {
                 CurrentHealth = TotalHealth;
             }
+            IsKO = false;
         }
 
         public void GetExp(Pokemon pokemonEnemy)
