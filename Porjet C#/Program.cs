@@ -35,7 +35,9 @@ namespace test
             Attack attack1 = new Attack("aazeazezaazeaeaeaezzeazeazezaeae", type, 1000);
             Pokemon pokemon1 = new Pokemon("testPokemon", 10000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
             pokemon1.setAttck(attack1);
-            
+            Types types1 = new Types("fire");
+            Types types2 = new Types("water");
+
             GameObject pokemonGameObject = new GameObject();
             pokemonGameObject.AddComponent(pokemon1);
             ((Bag)bag).PokemonList.Add(pokemonGameObject);
@@ -47,6 +49,21 @@ namespace test
             StateMachineGame stateMachineGame = new StateMachineGame();
             Game game = new Game(player);
             int lastState = 0;
+            List<Types> listType = new List<Types>();
+            listType.Add(types1);
+            listType.Add(types2);
+            types1.AddStrength(types2);
+            types2.AddWeakness(types1);
+            List<Pokemon> pokemonList = new List<Pokemon>();
+            Save save = new Save();
+            if (File.Exists("..\\..\\..\\..\\SAVE\\" + game.Playername + ".txt"))
+            {
+                pokemonList = save.LoadGame(game.Playername, game, (Bag)bag, listType);
+            }
+            else
+            {
+                save.SaveTheGame(game, (Bag)bag, pokemonList);
+            }
             while (true) {
                 switch (stateMachineGame)
                 {
@@ -58,6 +75,10 @@ namespace test
                         break;
                     case (StateMachineGame)1:
                         stateMachineGame = (StateMachineGame)menuPokemonTest.MenuScript(1, lastState);
+                        if (stateMachineGame == (StateMachineGame)1)
+                        {
+                            save.SaveTheGame(game, (Bag)bag, pokemonList);
+                        }
                         Console.Clear();
                         Console.WriteLine("\x1b[3J");
                         break;
