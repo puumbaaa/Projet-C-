@@ -23,8 +23,8 @@ namespace test
             player.AddComponent(playerRender);
             player.AddComponent(bag);
             //a enlever
-            Types type = new Types("fire");
-            Attack attack1 = new Attack("azertyuiop", type, 1000);
+            Types type = new Types("firehjsfgkjlfgejhsgflsdgh");
+            Attack attack1 = new Attack("aazeazezaazeaeaeaezzeazeazezaeae", type, 1000);
             Pokemon pokemon1 = new Pokemon("testPokemon", 1000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
             pokemon1.setAttck(attack1);
             

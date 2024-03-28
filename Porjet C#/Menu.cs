@@ -221,7 +221,15 @@ namespace Porjet_C_
                                 break;
                             //first attack
                             case 4:
-                                finalMap += pokemon.ListAttacks[0].ComponentName.Remove(10) + " " + pokemon.ListAttacks[0].AttackStat;
+                                string firstAttack = pokemon.ListAttacks[0].ComponentName;
+                                if (firstAttack.Length > 10)
+                                {
+                                    firstAttack = firstAttack.Remove(10);
+                                } while (firstAttack.Length < 10)
+                                {
+                                    firstAttack += " ";
+                                }
+                                finalMap += firstAttack + " " + pokemon.ListAttacks[0].AttackStat;
                                 if (pokemon.ListAttacks[0].AttackStat < 1000)
                                 {
                                     finalMap += " ";
@@ -268,7 +276,16 @@ namespace Porjet_C_
                             case 36:
                                 if (pokemon.ListAttacks.Count >= 2)
                                 {
-                                    finalMap += pokemon.ListAttacks[1].ComponentName.Remove(10) + " " + pokemon.ListAttacks[1].AttackStat;
+                                    string secondAttack = pokemon.ListAttacks[1].ComponentName;
+                                    if (secondAttack.Length > 10)
+                                    {
+                                        secondAttack = secondAttack.Remove(10);
+                                    } 
+                                    while (secondAttack.Length < 10)
+                                    {
+                                        secondAttack += " ";
+                                    }
+                                    finalMap += secondAttack + " " + pokemon.ListAttacks[1].AttackStat;
                                     if (pokemon.ListAttacks[1].AttackStat < 1000)
                                     {
                                         finalMap += " ";
@@ -330,7 +347,16 @@ namespace Porjet_C_
                             case 58:
                                 if (pokemon.ListAttacks.Count >= 3)
                                 {
-                                    finalMap += pokemon.ListAttacks[2].ComponentName.Remove(10) + " " + pokemon.ListAttacks[2].AttackStat;
+                                    string thirdAttack = pokemon.ListAttacks[2].ComponentName;
+                                    if (thirdAttack.Length > 10)
+                                    {
+                                        thirdAttack = thirdAttack.Remove(10);
+                                    } 
+                                    while (thirdAttack.Length < 10)
+                                    {
+                                        thirdAttack += " ";
+                                    }
+                                    finalMap += thirdAttack + " " + pokemon.ListAttacks[2].AttackStat;
                                     if (pokemon.ListAttacks[2].AttackStat < 1000)
                                     {
                                         finalMap += " ";
@@ -370,6 +396,7 @@ namespace Porjet_C_
                                 i += 4;
                                 nbDash += 4;
                                 break;
+                            //HP
                             case 76:
                                 string newStringHP = pokemon.CurrentHealth + "\\" + pokemon.TotalHealth;
                                 while (newStringHP.Length < 9)
@@ -380,10 +407,20 @@ namespace Porjet_C_
                                 nbDash += 9;
                                 i += 9;
                                 break;
+                            //forth Attack
                             case 85:
                                 if (pokemon.ListAttacks.Count >= 4)
                                 {
-                                    finalMap += pokemon.ListAttacks[3].ComponentName.Remove(10) + " " + pokemon.ListAttacks[3].AttackStat;
+                                    string forthAttack = pokemon.ListAttacks[3].ComponentName;
+                                    if (forthAttack.Length > 10)
+                                    {
+                                        forthAttack = forthAttack.Remove(10);
+                                    }
+                                    while (forthAttack.Length < 10)
+                                    {
+                                        forthAttack += " ";
+                                    }
+                                    finalMap += forthAttack + " " + pokemon.ListAttacks[3].AttackStat;
                                     if (pokemon.ListAttacks[3].AttackStat < 1000)
                                     {
                                         finalMap += " ";
