@@ -156,7 +156,13 @@ namespace game
                     {
                         ((Bag)_player.ComponentsList[1]).ObjectsList.Add(((Bag)_map._mapTab[_playerY, _playerX].ComponentsList[1]).ObjectsList[0]);
                         ((Bag)_map._mapTab[_playerY, _playerX].ComponentsList[1]).RemoveObject(((Bag)_map._mapTab[_playerY, _playerX].ComponentsList[1]).ObjectsList[0]);
-                        Console.WriteLine("Vous avez ramassé une pokeball !");
+                        if (((Bag)_player.ComponentsList[1]).ObjectsList[((Bag)_player.ComponentsList[1]).ObjectsList.Count - 1].IsPokeball){
+                            Console.WriteLine("Vous avez ramassé une pokeball !");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Vous avez ramassé une clé !");
+                        }
                     }
 
                 }

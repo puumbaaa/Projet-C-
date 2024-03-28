@@ -23,22 +23,14 @@ namespace test
             player.AddComponent(playerRender);
             player.AddComponent(bag);
             //a enlever
-            GameObject gameObject = new GameObject();
-            Component testCompo = new Component("test componenet");
-            Component testCompo1 = new Component("test componenet1");
-            Component testCompo2 = new Component("test componenet2");
-            Component testCompo3 = new Component("test componenet3");
-            gameObject.AddComponent(testCompo);
-            gameObject.AddComponent(testCompo1);
-            gameObject.AddComponent(testCompo2);
-            gameObject.AddComponent(testCompo3);
             Types type = new Types("fire");
             Attack attack1 = new Attack("azertyuiop", type, 1000);
             Pokemon pokemon1 = new Pokemon("testPokemon", 1000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
             pokemon1.setAttck(attack1);
-            ((Bag)bag).PokemonList.Add(pokemon1);
+            
             GameObject pokemonGameObject = new GameObject();
             pokemonGameObject.AddComponent(pokemon1);
+            ((Bag)bag).PokemonList.Add(pokemonGameObject);
             Menu menuPokemonTest = new Menu("Pokemons", player);
 
             StateMachineGame stateMachineGame = new StateMachineGame();

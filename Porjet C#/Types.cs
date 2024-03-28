@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace Porjet_C_
 {
-    internal class Types : Component
+    internal class Types
     {
         List<Types> _weaknessType;
         List<Types> _strengthType;
+        string _name;
 
+        public string Name { get => _name; private set => _name = value; }
         public List<Types> WeaknessType { get => _weaknessType; private set => _weaknessType = new(10); }
         public List<Types> StrengthType { get => _strengthType; private set => _strengthType = new(10); }
 
-        public Types(string componentName) : base(componentName)
+        public Types(string typeName)
         {
+            Name = typeName;
             WeaknessType = new List<Types>();
             StrengthType = new List<Types>();
         }

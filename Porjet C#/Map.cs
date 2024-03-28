@@ -20,18 +20,40 @@ namespace Mapp
                 if (file[i] == 'H')
                 {
                     GameObject grass = new GameObject();
-                    Component state = new CaseState("grass",true,false,true);
+                    Component state = new CaseState("grass", true, false, true);
                     Component bag = new Bag("bag");
                     grass.AddComponent(state);
                     grass.AddComponent(bag);
                     Random rnd = new Random();
-                    if (rnd.Next(100) <= 1)
+                    int r = rnd.Next(1000);
+                    if (r <= 10)
                     {
-                        Objects a = new Objects(false,true);
-                        ((Bag)grass.ComponentsList[1]).ObjectsList.Add(a);
+                        if (r > 1)
+                        {
+                            Objects a = new Objects(false, true);
+                            ((Bag)grass.ComponentsList[1]).ObjectsList.Add(a);
+                        }
+                        else if (r == 1)
+                        {
+                            Objects a = new Objects(true, false);
+                            ((Bag)grass.ComponentsList[1]).ObjectsList.Add(a);
+                        }
                     }
-                    
-                    _map[i / 122,j] = grass;
+
+                    _map[i / 122, j] = grass;
+                }
+                else if (file[i] == '|' || file[i] == '_')
+                {
+                    GameObject wall = new GameObject();
+                    Component state = new CaseState("border", false, true, false);
+                    wall.AddComponent(state);
+                    _map[i / 122, j] = wall;
+                }
+                else if (file[i] == '/' || file[i] == (char)92){
+                    GameObject door = new GameObject();
+                    Component state = new CaseState("door", true, false, false);
+                    door.AddComponent(state);
+                    _map[i / 122, j] = door;
                 }
                 else
                 {

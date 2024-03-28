@@ -134,7 +134,7 @@ namespace Porjet_C_
                 for (int i = 0; i < ((Bag)_player.ComponentsList[1]).PokemonList.Count; i++)
                 {
                     Console.SetCursorPosition(x, y);
-                    Console.WriteLine(((Bag)_player.ComponentsList[1]).PokemonList[i].ComponentName);
+                    Console.WriteLine(((Bag)_player.ComponentsList[1]).PokemonList[i].ComponentsList[0].ComponentName);
                     y += 1;
                 }
                 y = 5;
@@ -179,7 +179,7 @@ namespace Porjet_C_
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");
-            Pokemon pokemon = ((Bag)_player.ComponentsList[1]).PokemonList[indexPokemon];
+            Pokemon pokemon = (Pokemon)((Bag)_player.ComponentsList[1]).PokemonList[indexPokemon].ComponentsList[0];
 
             FileReader newFileReader = new FileReader();
             newFileReader.setFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
@@ -251,7 +251,7 @@ namespace Porjet_C_
                                 break;
                             //type
                             case 27:
-                                string newStringType = pokemon.Types1.ComponentName;
+                                string newStringType = pokemon.Types1.Name;
                                 if (newStringType.Length > 9)
                                 {
                                     newStringType = newStringType.Remove(9);
@@ -441,6 +441,11 @@ namespace Porjet_C_
                         Console.WriteLine("Clé");
                     }
                     y += 1;
+                    if (y > 25)
+                    {
+                        y = 5;
+                        x += 10;
+                    }
                 }
                 y = 5;
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
