@@ -16,9 +16,9 @@ namespace Porjet_C_
         {
         }
 
-        public void SaveTheGame(string playerName, Game game, Bag bag, List<Pokemon> pokemons)
+        public void SaveTheGame( Game game, Bag bag, List<Pokemon> pokemons)
         {
-            string fileName = "..\\..\\..\\..\\SAVE\\" + playerName + ".txt";
+            string fileName = "..\\..\\..\\..\\SAVE\\" + game.Playername + ".txt";
             using (FileStream playerFile = File.Create(fileName));
             using (StreamWriter writePlayerFile = File.AppendText(fileName))
             {

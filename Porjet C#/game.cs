@@ -23,7 +23,9 @@ namespace game
         InputManager _inputManager = new InputManager();
         int _posX;
         int _posY;
+        string _playername;
 
+        public string Playername { get => _playername; set => _playername = value; }
         public int PosX { get => _posX; set => _posX = value; }
         public int PosY { get => _posY; set => _posY = value; }
         public Game(GameObject player)
@@ -33,6 +35,7 @@ namespace game
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
+            Playername = Console.ReadLine();
             _mapFile.setFile(sMap);
             _mapFile.printFile();
             

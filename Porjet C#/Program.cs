@@ -42,7 +42,7 @@ namespace test
             Game game = new Game(player);
 
             Save save = new Save();
-            save.SaveTheGame("testPlayer1212311", game, bag2, pokemonList);
+            save.SaveTheGame(game, bag2, pokemonList);
             Console.Clear();
             Console.WriteLine($"Pos : {game.PosX} , {game.PosY}");
             Console.WriteLine($"Key : {bag2.NbKey} ,  Pokeball : {bag2.NbPokeball}, potion : {bag2.NbPotion}, nbAttack : {bag2.AttackBoost}, nbDef : {bag2.DefBoost}, nbSpeed ; {bag2.SpeedBoost}");
