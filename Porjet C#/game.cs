@@ -28,6 +28,7 @@ namespace game
         int _indexMap = 0;
         string _sMap1 = "..\\..\\..\\..\\ASCII\\Map\\map.txt";
         string _sMap2 = "..\\..\\..\\..\\ASCII\\Map\\map2.txt";
+        bool _isDisplayDialogue;
 
         public bool IsKey { get => _isKey; set => _isKey = value; }
         public int IndexMap { get => _indexMap; set => _indexMap = value; }
@@ -106,6 +107,8 @@ namespace game
 
             while (true)
             {
+                //test dialogue
+                Dialogue dialogue = new Dialogue("dialogue");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 _inputManager.Update(keyInfo);
@@ -237,6 +240,22 @@ namespace game
                         }
                     }
 
+                }
+                    //Dialogue
+                if (_playerX == 92 && _playerY==16)
+                {
+                    if (!_isDisplayDialogue)
+                    {
+                        Console.WriteLine(dialogue.Dialogues[0]);
+                        Console.WriteLine(dialogue.Dialogues[1]);
+                        Console.WriteLine(dialogue.Dialogues[2]);
+                        Console.WriteLine(dialogue.Dialogues[3]);
+                        _isDisplayDialogue = true;
+                    }
+                }
+                else
+                {
+                    _isDisplayDialogue = false;
                 }
             }
         }

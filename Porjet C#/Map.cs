@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Porjet_C_;
+using Porjet_C_.components;
+
 namespace Mapp
 {
     class Map
@@ -63,6 +65,15 @@ namespace Mapp
                     Component state = new CaseState("door", false, false, false, true);
                     door.AddComponent(state);
                     _map[i / 122, j] = door;
+                }
+                else if (file[i] == 'N')
+                {
+                    GameObject npc = new GameObject();
+                    Component state = new CaseState("npc", false, false, false);
+                    Dialogue dialogue = new Dialogue("dialogue");
+                    npc.AddComponent(state);
+                    npc.AddComponent(dialogue);
+                    _map[i/122, j] = npc;
                 }
                 else
                 {
