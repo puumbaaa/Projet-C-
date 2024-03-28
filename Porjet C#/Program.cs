@@ -49,6 +49,7 @@ namespace test
             types1.AddStrength(types2);
             types2.AddWeakness(types1);
 
+            //LOAD OLD PLAYER OR SAVE NEW PLAYER
             if (File.Exists("..\\..\\..\\..\\SAVE\\" + game.Playername + ".txt")) 
             {
                pokemonList = save.LoadGame(game.Playername, game, bag2, listType);
