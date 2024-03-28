@@ -21,6 +21,9 @@ namespace game
         Map _map;
         GameObject _player;
         InputManager _inputManager = new InputManager();
+        int _posX;
+        int _posY;
+        string _playername;
         int _playerX = 0;
         int _playerY = 0;
         bool _isKey = false;
@@ -31,6 +34,9 @@ namespace game
         public bool IsKey { get => _isKey; set => _isKey = value; }
         public int IndexMap { get => _indexMap; set => _indexMap = value; }
 
+        public string Playername { get => _playername; set => _playername = value; }
+        public int PosX { get => _posX; set => _posX = value; }
+        public int PosY { get => _posY; set => _posY = value; }
         public Game(GameObject player)
         {
             _player = player;
@@ -39,6 +45,9 @@ namespace game
             _map1.mapSet(_mapFile1.sText);
             _map2.mapSet(_mapFile2.sText);
 
+            Console.Write("Enter name : ");
+            Playername = Console.ReadLine();
+            _mapFile.setFile(sMap);
             _mapFile = _mapFile1;
             _map = _map1;
             
