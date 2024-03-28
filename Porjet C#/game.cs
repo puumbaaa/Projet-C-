@@ -35,6 +35,7 @@ namespace game
             string sCombat = "..\\..\\..\\..\\ASCII\\Scenes\\combat.txt";
             string sMonster = "..\\..\\..\\..\\ASCII\\Sprites\\monster1.txt";
 
+            Console.Write("Enter name : ");
             Playername = Console.ReadLine();
             _mapFile.setFile(sMap);
             _mapFile.printFile();
