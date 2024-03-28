@@ -53,6 +53,8 @@ namespace game
             
             _map.mapSet(_mapFile.sText);
 
+            _isDisplayDialogue = false;
+
             Console.SetCursorPosition(0, 0);
 
             

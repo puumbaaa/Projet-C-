@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Porjet_C_;
-using Porjet_C_.components;
 
 namespace Mapp
 {
@@ -69,7 +68,7 @@ namespace Mapp
                 else if (file[i] == 'N')
                 {
                     GameObject npc = new GameObject();
-                    Component state = new CaseState("npc", false, false, false);
+                    Component state = new CaseState("npc", false, false, false, false);
                     Dialogue dialogue = new Dialogue("dialogue");
                     npc.AddComponent(state);
                     npc.AddComponent(dialogue);
