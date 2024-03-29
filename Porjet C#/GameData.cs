@@ -120,13 +120,7 @@
             PokemonList.Add(astraleon);
             
 
-            /*
-            List<Types> types = new List<Types>();
-            types.Add(electricType);    
-            GameObject pikachu = new GameObject();
-            Component pikachuStat = new Pokemon();
-            pikachu.AddComponent(pikachuStat);
-            */
+            
 
         }
 

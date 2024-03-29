@@ -100,9 +100,10 @@ namespace Porjet_C_
                                 types = item;
                             }
                         }
-                        int attack= Int32.Parse(lines[currentPokemon + 10 + j * 3 + 2]); 
-                        Attack newAttack = new Attack(name, types, attack);
-                        newPokemon.setAttck(newAttack);
+                        int attack= Int32.Parse(lines[currentPokemon + 10 + j * 3 + 2]);
+
+                        Attack newAttack = new Attack(name, types, attack, null);
+                        newPokemon.setAttack(newAttack);
                     }
                     pokemonList.Add(newPokemon);
                 }

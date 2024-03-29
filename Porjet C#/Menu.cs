@@ -17,8 +17,8 @@ namespace Porjet_C_
         string _title;
         bool _isDisplay;
         string _menu = "";
-        int selectX;
-        int selectY;
+        int _selectX;
+        int _selectY;
         
         public string Title { get => _title; private set => _title = value;  }
         public bool IsDisplay { get => _isDisplay; private set => _isDisplay = value; }
@@ -30,14 +30,14 @@ namespace Porjet_C_
             _player = player;
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.Escape };
 
-            _menuFile.setFile("..\\..\\..\\..\\ASCII\\Menu\\menu.txt");
+            _menuFile.SetFile("..\\..\\..\\..\\ASCII\\Menu\\menu.txt");
             _inputManager.Init(inputKeys);
         }
 
         public int MenuScript(int menuItem, int lastState)
         {
-            selectX = 19;
-            selectY = 5;
+            _selectX = 19;
+            _selectY = 5;
             DisplayMenu();
             while (true)
             {
@@ -48,38 +48,38 @@ namespace Porjet_C_
                 
                 if (_inputManager.IsKey((ConsoleKey)38))
                 {
-                 if (selectY > 5)
+                 if (_selectY > 5)
                     {
-                        Console.MoveBufferArea(selectX, selectY,1,1,selectX,selectY - 5);
-                        selectY -= 5;
+                        Console.MoveBufferArea(_selectX, _selectY,1,1,_selectX,_selectY - 5);
+                        _selectY -= 5;
                         DisplayMenu();
                     }  
                 }
                 
                 if (_inputManager.IsKey((ConsoleKey)40))
                 {
-                    if (selectY < 20)
+                    if (_selectY < 20)
                     {
-                        Console.MoveBufferArea(selectX, selectY, 1, 1, selectX, selectY + 5);
-                        selectY += 5;
+                        Console.MoveBufferArea(_selectX, _selectY, 1, 1, _selectX, _selectY + 5);
+                        _selectY += 5;
                         DisplayMenu();
                     }
                 }
                 if (_inputManager.IsKey((ConsoleKey)39))
                 {
-                    if (selectY == 5)
+                    if (_selectY == 5)
                     {
                         DisplayObjectMenu();
                     }
-                    else if (selectY == 10)
+                    else if (_selectY == 10)
                     {
                         DisplayPokemonMenu();
                     }
-                    else if (selectY == 15)
+                    else if (_selectY == 15)
                     {
                         return 1;
                     }
-                    else if (selectY == 20)
+                    else if (_selectY == 20)
                     {
                         Environment.Exit(0);
                     }
@@ -102,7 +102,7 @@ namespace Porjet_C_
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(0, 0);
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(20, 5);
             Console.WriteLine("Objets");
@@ -112,7 +112,7 @@ namespace Porjet_C_
             Console.WriteLine("Sauvegarder");
             Console.SetCursorPosition(20, 20);
             Console.WriteLine("Quitter");
-            Console.SetCursorPosition(selectX, selectY);
+            Console.SetCursorPosition(_selectX, _selectY);
             Console.WriteLine("/");
             Console.CursorVisible = false;
         }
@@ -121,12 +121,12 @@ namespace Porjet_C_
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             int x = 20;
             int y = 5;
-            selectX = 19;
-            selectY = 5;
-            Console.SetCursorPosition(selectX, selectY);
+            _selectX = 19;
+            _selectY = 5;
+            Console.SetCursorPosition(_selectX, _selectY);
             Console.WriteLine("/");
             while (true)
             {
@@ -142,35 +142,35 @@ namespace Porjet_C_
                 _inputManager.Update(keyInfo);
                 if (_inputManager.IsKey((ConsoleKey)37))
                 {
-                    selectX = 19;
-                    selectY = 5;
+                    _selectX = 19;
+                    _selectY = 5;
                     return;
 
                 }
                 if (_inputManager.IsKey((ConsoleKey)38))
                 {
-                    if (selectY > 5)
+                    if (_selectY > 5)
                     {
-                        Console.MoveBufferArea(selectX, selectY, 1, 1, selectX, selectY - 1);
-                        selectY -= 1;
+                        Console.MoveBufferArea(_selectX, _selectY, 1, 1, _selectX, _selectY - 1);
+                        _selectY -= 1;
                     }
                 }
 
                 if (_inputManager.IsKey((ConsoleKey)40))
                 {
-                    if (selectY < ((Bag)_player.ComponentsList[1]).PokemonList.Count + 4)
+                    if (_selectY < ((Bag)_player.ComponentsList[1]).PokemonList.Count + 4)
                     {
-                        Console.MoveBufferArea(selectX, selectY, 1, 1, selectX, selectY + 1);
-                        selectY += 1;
+                        Console.MoveBufferArea(_selectX, _selectY, 1, 1, _selectX, _selectY + 1);
+                        _selectY += 1;
                     }
                 }
                 if (_inputManager.IsKey((ConsoleKey)39))
                 {
 
-                    DisplayPokemonStatMenu(selectY - 5);
+                    DisplayPokemonStatMenu(_selectY - 5);
                     Console.Clear();
                     Console.WriteLine("\x1b[3J");
-                    _menuFile.printFile();
+                    _menuFile.PrintFile();
                 }
             }
         }
@@ -182,7 +182,7 @@ namespace Porjet_C_
             Pokemon pokemon = (Pokemon)((Bag)_player.ComponentsList[1]).PokemonList[indexPokemon].ComponentsList[0];
 
             FileReader newFileReader = new FileReader();
-            newFileReader.setFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
+            newFileReader.SetFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
             string finalMap = "";
             int nbDash = 0;
             while (true)
@@ -460,7 +460,7 @@ namespace Porjet_C_
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             int x = 20;
             int y = 5;
             while (true) 

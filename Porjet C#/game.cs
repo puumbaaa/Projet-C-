@@ -32,15 +32,14 @@ namespace game
 
         public bool IsKey { get => _isKey; set => _isKey = value; }
         public int IndexMap { get => _indexMap; set => _indexMap = value; }
-
         public string Playername { get => _playername; set => _playername = value; }
         public int PosX { get => _playerX; set => _playerX = value; }
         public int PosY { get => _playerY; set => _playerY = value; }
         public Game(GameObject player)
         {
             _player = player;
-            _mapFile1.setFile(_sMap1);
-            _mapFile2.setFile(_sMap2);
+            _mapFile1.SetFile(_sMap1);
+            _mapFile2.SetFile(_sMap2);
             _map1.mapSet(_mapFile1.sText);
             _map2.mapSet(_mapFile2.sText);
 
@@ -49,7 +48,7 @@ namespace game
             _mapFile = _mapFile1;
             _map = _map1;
             
-            _mapFile.printFile();
+            _mapFile.PrintFile();
             
             _map.mapSet(_mapFile.sText);
 
@@ -79,7 +78,7 @@ namespace game
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.SetCursorPosition(0, 0);
-                _mapFile.printFile();
+                _mapFile.PrintFile();
 
                 Console.SetCursorPosition(_playerX, _playerY);
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -93,7 +92,7 @@ namespace game
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.SetCursorPosition(0, 0);
-                _mapFile.printFile();
+                _mapFile.PrintFile();
 
                 Console.SetCursorPosition(_playerX, _playerY);
                 Console.ForegroundColor = ConsoleColor.DarkBlue;

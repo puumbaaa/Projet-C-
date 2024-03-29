@@ -7,36 +7,36 @@ namespace Input
 
     public class InputManager
     {
-        private List<ConsoleKey> keys = new List<ConsoleKey>();
-        private List<KeyState> keyStates = new List<KeyState>();
+        private List<ConsoleKey> _keys = new List<ConsoleKey>();
+        private List<KeyState> _keyStates = new List<KeyState>();
 
         public void Init(List<ConsoleKey> inputKeys)
         {
-            keys = inputKeys;
-            keyStates = new List<KeyState>(new KeyState[keys.Count]);
+            _keys = inputKeys;
+            _keyStates = new List<KeyState>(new KeyState[_keys.Count]);
         }
 
         public void Update(ConsoleKeyInfo keyInfo)
         {
             if (keyInfo != null) {
-                for (int i = 0; i < keys.Count; i++)
+                for (int i = 0; i < _keys.Count; i++)
                 {
 
-                    KeyState currentState = keyStates[i];
+                    KeyState currentState = _keyStates[i];
 
-                    if (keyInfo.Key == keys[i])
+                    if (keyInfo.Key == _keys[i])
                     {
                         if (currentState == KeyState.Down || currentState == KeyState.Press)
-                            keyStates[i] = KeyState.Press;
+                            _keyStates[i] = KeyState.Press;
                         else
-                            keyStates[i] = KeyState.Down;
+                            _keyStates[i] = KeyState.Down;
                     }
                     else
                     {
                         if (currentState == KeyState.Up || currentState == KeyState.NoPress)
-                            keyStates[i] = KeyState.NoPress;
+                            _keyStates[i] = KeyState.NoPress;
                         else
-                            keyStates[i] = KeyState.Up;
+                            _keyStates[i] = KeyState.Up;
                     }
                 }
             }
@@ -45,10 +45,10 @@ namespace Input
 
         public bool IsKey(ConsoleKey key)
         {
-            int index = keys.IndexOf(key);
+            int index = _keys.IndexOf(key);
             if (index != -1)
             {
-                return keyStates[index] == KeyState.Press || keyStates[index] == KeyState.Down;
+                return _keyStates[index] == KeyState.Press || _keyStates[index] == KeyState.Down;
             }
             return false;
         }
