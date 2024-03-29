@@ -69,6 +69,7 @@ namespace test
             Grid grid = new Grid();
             CombatMenu combatMenu = new CombatMenu();
             AttackList attack = new AttackList();
+            Random rnd = new Random();
             GameData gameData = new GameData();
             
             
@@ -98,9 +99,13 @@ namespace test
             // Draw Grid
             combatGridFile.PrintFile();
 
-            int m_Case;
-            m_Case = 12;
-            grid.gridSlots[m_Case] = gameData.PokemonList[0];
+            int m_Case = 0;
+            int m_CaseEnemy;
+            int m_CaseAlly;
+            m_CaseEnemy = rnd.Next(9,18);
+            m_CaseAlly = rnd.Next(0,9);
+            grid.gridSlots[m_CaseAlly] = gameData.PokemonList[0];
+            grid.gridSlots[m_CaseEnemy] = gameData.PokemonList[0];
 
             // Draw Enemy
             for (int i = 0; i < grid.gridSlots.Count(); i++)
@@ -112,6 +117,10 @@ namespace test
                     for (int j = 0; j < monster2File.GetTextLineCount(); j++)
                     {
                         Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                        if (j== 0)
+                        {
+                            Console.WriteLine("    HP : " + ((Pokemon)grid.gridSlots[m_Case].ComponentsList[0]).CurrentHealth);
+                        }
                         monster2File.PrintTextLine(j);
                     }
                 }
@@ -218,7 +227,7 @@ namespace test
             |                                                                                     |
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
-            Console.Clear();
+                Console.Clear();
 
                 // Draw Grid
                 combatGridFile.PrintFile();
@@ -232,13 +241,14 @@ namespace test
 
 
                 // Attack Menu
+                // Combat Loop
                 if (combatMenu.attackState != AttackState.OUT)
                 {
 
                     // Use Attack
                     if (inputManager.IsKey((ConsoleKey)13)) // Enter
                     {
-                        combatMenu.UseAttack(attack, grid, gameData);
+                        combatMenu.UseAttack(attack, grid, gameData) ;
                     }
 
                     // Draw Attack Menu
@@ -260,23 +270,25 @@ namespace test
 
                 }
 
-               
+
 
                 // Draw Enemy
                 for (int i = 0; i < grid.gridSlots.Count(); i++)
                 {
                     m_Case = i;
-                    if(grid.gridSlots[m_Case] != null)
+                    if (grid.gridSlots[m_Case] != null)
                     {
-                        
+
                         for (int j = 0; j < monster2File.GetTextLineCount(); j++)
                         {
                             Console.SetCursorPosition(grid.combatGrid[m_Case, 0], grid.combatGrid[m_Case, 1] + j);
+                            if (j == 0)
+                            {
+                                Console.WriteLine("    HP : " + ((Pokemon)grid.gridSlots[m_Case].ComponentsList[0]).CurrentHealth);
+                            }
                             monster2File.PrintTextLine(j);
                         }
-
                     }
-                    
                 }
 
 

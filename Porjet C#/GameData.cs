@@ -82,7 +82,7 @@
             |                                                                                     |
             *///----------------------------------------------------------------------------------|
 
-            Attack novaStrike = new Attack("Nova Strike", voidType, 300, attackList.novaStrike) ;
+            Attack novaStrike = new Attack("Nova Strike", voidType, 500, attackList.novaStrike) ;
             AttackList.Add(novaStrike);
             Attack stellarRoar = new Attack("Stellar Roar", mysticType, 300, attackList.stellarRoar);
             AttackList.Add(novaStrike);
@@ -118,7 +118,16 @@
             ((Pokemon)astraleonStat).setAttack(celestialBeam);
             astraleon.AddComponent(astraleonStat);
             PokemonList.Add(astraleon);
-            
+
+            GameObject goblin = new GameObject();
+            Component goblinStat = new Pokemon("goblinStat", 1, 0, 100, normalType, 3, 1, 2, 30, 30, false);
+            Component goblinRender = new Render("goblinRender", "f");
+            ((Pokemon)astraleonStat).setAttack(novaStrike);
+            ((Pokemon)astraleonStat).setAttack(stellarRoar);
+            ((Pokemon)astraleonStat).setAttack(lunarShield);
+            ((Pokemon)astraleonStat).setAttack(celestialBeam);
+            astraleon.AddComponent(astraleonStat);
+            PokemonList.Add(astraleon);
 
             /*
             List<Types> types = new List<Types>();
