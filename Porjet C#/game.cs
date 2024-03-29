@@ -39,8 +39,8 @@ namespace game
         public Game(GameObject player)
         {
             _player = player;
-            _mapFile1.setFile(_sMap1);
-            _mapFile2.setFile(_sMap2);
+            _mapFile1.SetFile(_sMap1);
+            _mapFile2.SetFile(_sMap2);
             _map1.mapSet(_mapFile1.sText);
             _map2.mapSet(_mapFile2.sText);
 
@@ -49,7 +49,7 @@ namespace game
             _mapFile = _mapFile1;
             _map = _map1;
             
-            _mapFile.printFile();
+            _mapFile.PrintFile();
             
             _map.mapSet(_mapFile.sText);
 
@@ -79,7 +79,7 @@ namespace game
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.SetCursorPosition(0, 0);
-                _mapFile.printFile();
+                _mapFile.PrintFile();
 
                 Console.SetCursorPosition(_playerX, _playerY);
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -93,7 +93,7 @@ namespace game
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.SetCursorPosition(0, 0);
-                _mapFile.printFile();
+                _mapFile.PrintFile();
 
                 Console.SetCursorPosition(_playerX, _playerY);
                 Console.ForegroundColor = ConsoleColor.DarkBlue;

@@ -30,7 +30,7 @@ namespace Porjet_C_
             _player = player;
             List<ConsoleKey> inputKeys = new List<ConsoleKey> { ConsoleKey.LeftArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.RightArrow, ConsoleKey.Escape };
 
-            _menuFile.setFile("..\\..\\..\\..\\ASCII\\Menu\\menu.txt");
+            _menuFile.SetFile("..\\..\\..\\..\\ASCII\\Menu\\menu.txt");
             _inputManager.Init(inputKeys);
         }
 
@@ -102,7 +102,7 @@ namespace Porjet_C_
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.SetCursorPosition(0, 0);
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(20, 5);
             Console.WriteLine("Objets");
@@ -121,7 +121,7 @@ namespace Porjet_C_
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             int x = 20;
             int y = 5;
             selectX = 19;
@@ -170,7 +170,7 @@ namespace Porjet_C_
                     DisplayPokemonStatMenu(selectY - 5);
                     Console.Clear();
                     Console.WriteLine("\x1b[3J");
-                    _menuFile.printFile();
+                    _menuFile.PrintFile();
                 }
             }
         }
@@ -182,7 +182,7 @@ namespace Porjet_C_
             Pokemon pokemon = (Pokemon)((Bag)_player.ComponentsList[1]).PokemonList[indexPokemon].ComponentsList[0];
 
             FileReader newFileReader = new FileReader();
-            newFileReader.setFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
+            newFileReader.SetFile("..\\..\\..\\..\\ASCII\\Menu\\menuPokemontotal.txt");
             string finalMap = "";
             int nbDash = 0;
             while (true)
@@ -460,7 +460,7 @@ namespace Porjet_C_
         {
             Console.Clear();
             Console.WriteLine("\x1b[3J");
-            _menuFile.printFile();
+            _menuFile.PrintFile();
             int x = 20;
             int y = 5;
             while (true) 

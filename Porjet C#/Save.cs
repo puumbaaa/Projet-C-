@@ -52,9 +52,16 @@ namespace Porjet_C_
                             writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].ComponentName);
                             writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].AttackStat);
                             writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OTypes.Name);
+
+                            for (int k = 0; k < pokemons[i].ListAttacks[j].OCases.Length; k++)
+                            {
+                                writePlayerFile.WriteLine(pokemons[i].ListAttacks[j].OCases[k]);
+                            }
+                            
                         }
                         else
                         {
+                            writePlayerFile.WriteLine("");
                             writePlayerFile.WriteLine("");
                             writePlayerFile.WriteLine("");
                             writePlayerFile.WriteLine("");
@@ -100,9 +107,16 @@ namespace Porjet_C_
                                 types = item;
                             }
                         }
-                        int attack= Int32.Parse(lines[currentPokemon + 10 + j * 3 + 2]); 
-                        Attack newAttack = new Attack(name, types, attack);
-                        newPokemon.setAttck(newAttack);
+                        int attack= Int32.Parse(lines[currentPokemon + 10 + j * 3 + 2]);
+                        int[] cases = null;
+                        
+                        cases[0] = Int32.Parse(lines[currentPokemon + 10 + j * 3 + 3]);
+                        cases[1] = Int32.Parse(lines[currentPokemon + 10 + j * 3 + 4]);
+                        cases[2] = Int32.Parse(lines[currentPokemon + 10 + j * 3 + 5]);
+                        cases[3] = Int32.Parse(lines[currentPokemon + 10 + j * 3 + 6]);
+
+                        Attack newAttack = new Attack(name, types, attack, cases);
+                        newPokemon.setAttack(newAttack);
                     }
                     pokemonList.Add(newPokemon);
                 }

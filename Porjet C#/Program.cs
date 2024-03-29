@@ -31,15 +31,16 @@ namespace test
             Console.SetBufferSize(120, 32);
 
             GameObject player = new GameObject();
+            AttackList attackList = new AttackList();
             Component playerRender = new Render("render","P");
             Component bag = new Bag("bag");
             player.AddComponent(playerRender);
             player.AddComponent(bag);
             //a enlever
             Types type = new Types("firehjsfgkjlfgejhsgflsdgh");
-            Attack attack1 = new Attack("aazeazezaazeaeaeaezzeazeazezaeae", type, 1000);
+            Attack attack1 = new Attack("aazeazezaazeaeaeaezzeazeazezaeae", type, 1000, attackList.aazeazezaazeaeaeaezzeazeazezaeae);
             Pokemon pokemon1 = new Pokemon("testPokemon", 10000, 1000, 1000, type, 1111, 2222, 3333, 100, 200, false);
-            pokemon1.setAttck(attack1);
+            pokemon1.setAttack(attack1);
             Types types1 = new Types("fire");
             Types types2 = new Types("water");
 

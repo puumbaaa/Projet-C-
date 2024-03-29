@@ -19,7 +19,7 @@ namespace Porjet_C_
         public int[] stellarRoar = { 9, 10, 15, 16 };
         public int[] lunarShield = { 9, 12, 15 };
         public int[] celestialBeam = { 9, 11, 13, 16 };
-
+        public int[] aazeazezaazeaeaeaezzeazeazezaeae = { 9, 11, 13, };
 
     }
 }
